@@ -6,8 +6,8 @@ services:
     ports:
       - 3000:3000
     environment:
-      REACT_APP_BACKEND_HOST: "192.99.108.204" # Overriden in the docker-compose.override.yml file
-      REACT_APP_BACKEND_PORT: "3001"
+      ANGULAR_APP_BACKEND_HOST: "192.99.108.204" # Overriden in the docker-compose.override.yml file
+      ANGULAR_APP_BACKEND_PORT: "3001"
     restart: always
 
   backend:
