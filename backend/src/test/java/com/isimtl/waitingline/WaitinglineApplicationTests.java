@@ -1,4 +1,4 @@
-package com.isi.waitingline;
+package com.isimtl.waitingline;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
