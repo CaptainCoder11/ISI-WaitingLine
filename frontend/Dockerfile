@@ -20,4 +20,3 @@ RUN npm install --silent
 # start app
 EXPOSE 3000
 CMD ["npm", "start"]
-
