@@ -9,3 +9,7 @@ node_modules
 .DS_Store
 *~
 *.swp
+
+**/android/FIFO/.gradle
+**/android/FIFO/.idea
+**/android/FIFO/app/build
