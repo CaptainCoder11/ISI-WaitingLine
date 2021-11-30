@@ -10,12 +10,12 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
 
+# add app
+COPY . ./
+
 RUN npm cache clean --force
 RUN npm cache verify
 RUN npm install --silent
-
-# add app
-COPY . ./
 
 # start app
 EXPOSE 3000

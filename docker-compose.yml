@@ -10,21 +10,21 @@ services:
       ANGULAR_APP_BACKEND_PORT: "3001"
     restart: always
 
-  backend:
-    build: ./backend
-    image: backend
-    ports:
-      - 3001:3001
-    environment:
-      CONFIG_MYSQL_DATABASE: fifo
-      CONFIG_MYSQL_USER: root
-      CONFIG_MYSQL_PASSWORD: secret
-      CONFIG_MYSQL_HOST: db
-      # from the backend, connect to MySQL via the "db" hostname on port 3306
-      CONFIG_MYSQL_PORT: 3306
-    depends_on:
-      - db
-    restart: always
+  # backend:
+  #   build: ./backend
+  #   image: backend
+  #   ports:
+  #     - 3001:3001
+  #   environment:
+  #     CONFIG_MYSQL_DATABASE: fifo
+  #     CONFIG_MYSQL_USER: root
+  #     CONFIG_MYSQL_PASSWORD: secret
+  #     CONFIG_MYSQL_HOST: db
+  #     # from the backend, connect to MySQL via the "db" hostname on port 3306
+  #     CONFIG_MYSQL_PORT: 3306
+  #   depends_on:
+  #     - db
+  #   restart: always
 
   db:
     container_name: db
