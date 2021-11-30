@@ -6,13 +6,12 @@ import { StoreLoginComponent } from './pages/login/login.component';
 import { StoreComponent } from './store.component';
 
 const routes: Routes = [{
+  path: 'login',
+  component: StoreLoginComponent,
+}, {
   path: '',
   component: StoreComponent,
   children: [
-    {
-      path: 'login',
-      component: StoreLoginComponent,
-    },
     {
       path: 'dashboard',
       component: StoreDashboardComponent

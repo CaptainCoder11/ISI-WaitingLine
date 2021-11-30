@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #f8f9fc;
+}
+
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+.border-left-primary {
+    border-left: 0.25rem solid #4e73df !important;
+}
+
+.border-left-success {
+    border-left: 0.25rem solid #1cc88a !important;
+}
+
+.border-left-info {
+    border-left: 0.25rem solid #36b9cc !important;
+}
+
+.border-left-warning {
+    border-left: 0.25rem solid #f6c23e !important;
+}
+
+footer.sticky-footer {
+    margin-top: 20px;
+    padding: 2rem 0;
+    flex-shrink: 0;
+}
+footer.sticky-footer .copyright {
+    line-height: 1;
+    font-size: 0.8rem;
+}

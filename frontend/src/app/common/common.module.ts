@@ -6,12 +6,12 @@ import { CommonModule as AngularCommonModule } from '@angular/common';
   declarations: [
   ],
   imports: [
-    AngularCommonModule
+    AngularCommonModule,
   ],
   providers: [StoreService],
   bootstrap: [],
   exports: [
-    AngularCommonModule
+    AngularCommonModule,
   ]
 })
 export class CommonModule { }
