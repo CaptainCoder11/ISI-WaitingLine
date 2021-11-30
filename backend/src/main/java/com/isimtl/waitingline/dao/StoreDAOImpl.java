@@ -8,9 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public class StoreDAOImpl implements StoreDAO{
+public class StoreDAOImpl implements StoreDAO {
+
 
     private EntityManager entityManager;
 
@@ -28,8 +30,10 @@ public class StoreDAOImpl implements StoreDAO{
     }
 
     @Override
-    public Store findById(int id) {
-        return null;
+    public Store findById(UUID id) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Store store = currentSession.get(Store.class, id);
+        return store;
     }
 
     @Override
