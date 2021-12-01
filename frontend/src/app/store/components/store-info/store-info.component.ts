@@ -9,7 +9,8 @@ import { Store } from 'src/app/common/models/store.model';
 export class StoreInfoComponent implements OnInit {
 
   @Input() store: Store;
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

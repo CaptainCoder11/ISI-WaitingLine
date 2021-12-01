@@ -17,7 +17,7 @@ const routes: Routes = [{
       component: StoreDashboardComponent
     },
     {
-      path: 'employee',
+      path: 'employees',
       component: StoreEmployeeComponent
     }
   ]

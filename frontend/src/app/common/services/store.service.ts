@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class StoreService {
-  private _url: string = environment.api_url;
+  private _url: string = `${environment.api_url}/store`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -16,7 +16,7 @@ export class StoreService {
 
   getById(id: number): Observable<Store> {
     return this.httpClient.get<Store>(this._url).pipe(
-      map((x: any) => x.stores[0]),
+      map((x: any) => x[0]),
     );
   }
 }
