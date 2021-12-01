@@ -16,6 +16,7 @@ import com.example.waitbuddy.R
 import com.google.common.util.concurrent.ListenableFuture
 import com.isimtl.waitingline.EventBus.MessageEvent
 import com.isimtl.waitingline.Exensions.log
+import com.isimtl.waitingline.Exensions.openActivity
 import com.isimtl.waitingline.Exensions.register
 import com.isimtl.waitingline.Exensions.unregister
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         analyzer= MyImageAnalyzer()
         startCamera()
+
     }
 
 

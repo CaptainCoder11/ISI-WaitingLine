@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1031591606441",
+    "project_id": "fifo-39066",
+    "storage_bucket": "fifo-39066.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031591606441:android:a1d8ba98f30fd85beb11b8",
+        "android_client_info": {
+          "package_name": "com.isimtl.waitingline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031591606441-1bt8jrudsvckc4o7157js9agfjp9rlda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWM3yUs39m93a4SH_OSQ7-WnmVcPjq7xs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031591606441-1bt8jrudsvckc4o7157js9agfjp9rlda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
