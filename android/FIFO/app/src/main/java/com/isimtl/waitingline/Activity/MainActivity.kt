@@ -15,10 +15,7 @@ import com.isimtl.waitingline.Extensions.MyImageAnalyzer
 import com.example.waitbuddy.R
 import com.google.common.util.concurrent.ListenableFuture
 import com.isimtl.waitingline.EventBus.MessageEvent
-import com.isimtl.waitingline.Exensions.log
-import com.isimtl.waitingline.Exensions.openActivity
-import com.isimtl.waitingline.Exensions.register
-import com.isimtl.waitingline.Exensions.unregister
+import com.isimtl.waitingline.Exensions.*
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
@@ -51,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         analyzer= MyImageAnalyzer()
         startCamera()
-
     }
 
 
