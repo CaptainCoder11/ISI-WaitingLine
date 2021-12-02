@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -41,5 +42,13 @@
         </RelativeLayout>
 
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imgback"
+        android:layout_margin="@dimen/_4sdp"
+        android:src="@mipmap/back"
+        android:padding="@dimen/_15sdp"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_55sdp"></ImageView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

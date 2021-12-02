@@ -1,4 +1,4 @@
-package com.isimtl.waitingline.Activity
+package com.isimtl.waitingline.Service
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -8,9 +8,9 @@ import android.graphics.Color
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import com.example.waitbuddy.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.isimtl.waitingline.R
 
 class FirebaseMessageReceiver : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {

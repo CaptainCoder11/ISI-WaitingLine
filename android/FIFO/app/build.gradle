@@ -68,6 +68,7 @@ dependencies {
 
     //sdp
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
     //ssp
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     //cardview
@@ -85,5 +86,8 @@ dependencies {
     // Add the dependencies for any other desired Firebase products
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
+
+    //Event Bus
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
 }

@@ -12,10 +12,10 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.isimtl.waitingline.Extensions.MyImageAnalyzer
-import com.example.waitbuddy.R
 import com.google.common.util.concurrent.ListenableFuture
 import com.isimtl.waitingline.EventBus.MessageEvent
 import com.isimtl.waitingline.Exensions.*
+import com.isimtl.waitingline.R
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
@@ -23,7 +23,7 @@ import org.greenrobot.eventbus.Subscribe
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class MainActivity : AppCompatActivity() {
+class QRScanActivity : AppCompatActivity() {
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var analyzer: MyImageAnalyzer
@@ -48,6 +48,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         analyzer= MyImageAnalyzer()
         startCamera()
+
+        imgback.setOnClickListener {
+            finish()
+        }
 
     }
 

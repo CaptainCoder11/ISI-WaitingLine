@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.waitbuddy" >
-
+    package="com.isimtl.waitingline" >
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -17,19 +16,29 @@
             android:name="com.isimtl.waitingline.Activity.MainActivity2"
             android:theme="@style/Theme.Design.NoActionBar">
         </activity>
-<!--        <activity android:name="com.isimtl.waitingline.Activity.StoreDetails" />-->
-
-<!--        android:name="com.isimtl.waitingline.Activity.MainActivity"-->
 
 
+        <activity
+            android:name="com.isimtl.waitingline.Activity.StoreDetails"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-       <!-- <service android:name="com.isimtl.waitingline.Activity.FirebaseMessageReceiver"
-            android:exported="true"
-            >
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.isimtl.waitingline.Activity.QRScanActivity"></activity>
+
+
+
+        <service android:name="com.isimtl.waitingline.Service.FirebaseMessageReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>-->
+        </service>
+
     </application>
 
 </manifest>

@@ -2,9 +2,14 @@ package com.isimtl.waitingline.Exensions
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import com.isimtl.waitingline.EventBus.MessageEvent
 import org.greenrobot.eventbus.EventBus
 
@@ -27,6 +32,22 @@ fun View.show(){
 
 fun View.hide(){
     this.visibility = View.INVISIBLE
+}
+
+fun View.font(font: String) {
+    when(this)
+    {
+      is Button ->{
+          typeface = Typeface.createFromAsset(context.assets, "fonts/$font")
+      }
+      is TextView ->{
+          typeface = Typeface.createFromAsset(context.assets, "fonts/$font")
+      }
+        is EditText ->{
+            typeface = Typeface.createFromAsset(context.assets, "fonts/$font")
+        }
+    }
+
 }
 
 fun Any.log(){
