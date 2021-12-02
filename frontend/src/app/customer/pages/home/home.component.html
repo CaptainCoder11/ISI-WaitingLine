@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="col-md-4" *ngFor="let store of (stores$|async)">
-      <div class="card mb-4 box-shadow">
+      <div class="card mb-4 box-shadow" (click)="showStoreDetails(store)">
         <img class="card-img-top"
           data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
           alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
@@ -61,7 +61,6 @@
           <p class="card-text">
             <label class="text-center d-block">{{store.name}}</label>
           </p>
-
         </div>
         <div class="card-footer text-muted">
           <div class="d-flex justify-content-between">
@@ -72,52 +71,8 @@
         </div>
       </div>
     </div>
-    <!-- <div class="col-md-4">
-      <div class="card mb-4 box-shadow">
-
-        <img class="card-img-top"
-          data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-          alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
-          src="https://media.istockphoto.com/vectors/abstract-business-arrow-up-logo-icon-vector-design-template-vector-id1140553971?k=20&m=1140553971&s=612x612&w=0&h=7-a1JjWAf8c5qKF46FRgdFg-3jva9qo80hqh0z_Y34A="
-          data-holder-rendered="true">
-        <div class="card-body">
-          <p class="card-text">
-            <label class="text-center d-block">Walmart</label>
-          </p>
-
-        </div>
-        <div class="card-footer text-muted">
-          <div class="d-flex justify-content-between">
-            <span class="text-capitalize font-weight-normal">Open:10:00 AM
-            </span>
-            <span class="text-capitalize font-weight-normal"> Close: 6:00 PM</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card mb-4 box-shadow">
-
-        <img class="card-img-top"
-          data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-          alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
-          src="https://media.istockphoto.com/vectors/abstract-business-arrow-up-logo-icon-vector-design-template-vector-id1140553971?k=20&m=1140553971&s=612x612&w=0&h=7-a1JjWAf8c5qKF46FRgdFg-3jva9qo80hqh0z_Y34A="
-          data-holder-rendered="true">
-        <div class="card-body">
-          <p class="card-text">
-            <label class="text-center d-block">Walmart</label>
-          </p>
-
-        </div>
-        <div class="card-footer text-muted">
-          <div class="d-flex justify-content-between">
-            <span class="text-capitalize font-weight-normal">Open:10:00 AM
-            </span>
-            <span class="text-capitalize font-weight-normal"> Close: 6:00 PM</span>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
 <app-customer-footer></app-customer-footer>
+
+<div kendoDialogContainer></div>

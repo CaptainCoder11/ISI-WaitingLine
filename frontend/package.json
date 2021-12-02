@@ -13,6 +13,7 @@
     "@angular/animations": "~13.0.0",
     "@angular/common": "~13.0.0",
     "@angular/compiler": "~13.0.0",
+    "@angular/localize": "^11.2.8",
     "@angular/core": "~13.0.0",
     "@angular/forms": "~13.0.0",
     "@angular/platform-browser": "~13.0.0",
@@ -29,7 +30,18 @@
     "highcharts-angular": "^2.10.0",
     "highcharts-more": "^0.1.7",
     "moment": "^2.24.0",
-    "noty": "^3.2.0-beta"
+    "noty": "^3.2.0-beta",
+    "@progress/kendo-angular-buttons": "^6.1.0",
+    "@progress/kendo-angular-common": "^2.0.0",
+    "@progress/kendo-angular-dialog": "^5.0.0",
+    "@progress/kendo-angular-dropdowns": "^5.2.0",
+    "@progress/kendo-angular-inputs": "^7.2.0",
+    "@progress/kendo-angular-intl": "^3.1.0",
+    "@progress/kendo-angular-label": "^3.0.2",
+    "@progress/kendo-angular-layout": "^6.1.8",
+    "@progress/kendo-angular-popup": "^4.0.0",
+    "@progress/kendo-licensing": "^1.1.4",
+    "@progress/kendo-theme-default": "^4.36.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.0.2",
