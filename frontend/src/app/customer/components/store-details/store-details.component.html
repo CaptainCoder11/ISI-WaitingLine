@@ -1,7 +1,18 @@
-<kendo-dialog-titlebar>
-  Store details
-</kendo-dialog-titlebar>
-<p>Display store details here</p>
-<kendo-dialog-actions>
-  <button class="k-button cancel" (click)="onCancel($event)">Close</button>
-</kendo-dialog-actions>
+<div class="card" *ngIf="store">
+  <img class="card-img-top" [src]="store.logo">
+  <div class="card-body">
+    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+      alt="Thumbnail [100%x225]" style="height:180px; width: 100%; display: block;"
+      src="https://i.pinimg.com/736x/f6/d0/af/f6d0af482a5a1116dbbd2fd3ff95e58c.jpg" data-holder-rendered="true">
+    <h5 class="card-title text-center">{{store.name}}</h5>
+    <div class="d-flex justify-content-between"><span>Open: {{store.openingHour}}</span><span>Close:
+        {{store.closingHour}}</span></div>
+    <div class="d-flex justify-content-center">{{calc}}</div>
+    <div class="d-flex justify-content-center">
+      <input type="button" class="btn btn-success m-3" value="Login to Join Waiting List" />
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mb-2"><button class="btn btn-danger"
+      (click)="onCancel($event)">Close</button>
+  </div>
+</div>
