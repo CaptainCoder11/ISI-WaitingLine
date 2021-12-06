@@ -1,30 +1,38 @@
 package com.isimtl.waitingline.controller;
 
+import com.isimtl.waitingline.dto.StoreDTO;
 import com.isimtl.waitingline.entity.Store;
-import com.isimtl.waitingline.service.StoreService;
+import com.isimtl.waitingline.service.IStoreService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/store")
 public class StoreController {
 
-    private StoreService storeService;
+    private final IStoreService storeService;
+
 
     @Autowired
-    public StoreController(StoreService storeService) {
+    public StoreController(IStoreService storeService) {
         this.storeService = storeService;
     }
 
-    @GetMapping("/store")
-    public List<Store> getAll() {
-        return storeService.findAll();
+    @GetMapping("")
+    public ResponseEntity<List<StoreDTO>> getAll() {
+        return ResponseEntity.ok(this.storeService.findAll());
+
     }
 
-    @GetMapping("/store/{id}")
+
+    @GetMapping("/{id}")
     public Store getById(@PathVariable("id") UUID id){
         return storeService.findById(id);
     }
