@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import com.isimtl.waitingline.Exensions.font
+import com.isimtl.waitingline.Models.Store
 import com.isimtl.waitingline.R
 
 class ExampleAdapter(private val mExampleList: ArrayList<ExampleName>) : RecyclerView.Adapter<ExampleViewHolder>() {
@@ -20,10 +21,10 @@ class ExampleAdapter(private val mExampleList: ArrayList<ExampleName>) : Recycle
 
     override fun onBindViewHolder(holder: ExampleViewHolder, position: Int) {
         val currentItem = mExampleList[position]
-        holder.mImageView.setImageResource(currentItem.getmImage())
-        holder.mTextView1.text = currentItem.getmText1()
-        holder.mTextView2.text = currentItem.getmText2()
-        holder.mTextView3.text = currentItem.getmText3()
+        holder.mImageView.setImageResource(R.mipmap.store)
+        holder.mTextView1.text = currentItem.name
+        holder.mTextView2.text = currentItem.openingHour
+        holder.mTextView3.text = currentItem.closingHour
     }
 
     override fun getItemCount(): Int {
