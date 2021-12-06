@@ -13,7 +13,7 @@ import com.isimtl.waitingline.Exensions.font
 import com.isimtl.waitingline.Models.Store
 import com.isimtl.waitingline.R
 
-class ExampleAdapter(private val mExampleList: ArrayList<ExampleName>) : RecyclerView.Adapter<ExampleViewHolder>() {
+class ExampleAdapter(private val mExampleList: ArrayList<Store>) : RecyclerView.Adapter<ExampleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view, parent, false)
         return ExampleViewHolder(v)

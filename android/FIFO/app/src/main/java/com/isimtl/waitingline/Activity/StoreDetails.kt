@@ -31,8 +31,7 @@ class StoreDetails : AppCompatActivity() {
         tvtitle.font("DancingScript.ttf")
         tv_stores.font("DidactGothic-Regular.ttf")
         etsearch.font("DidactGothic-Regular.ttf")
-
-
+        
         getstores.enqueue( object : retrofit2.Callback<List<Store>> {
             override fun onResponse(call: Call<List<Store>>?, response: Response<List<Store>>?) {
                    var response =  response?.body()!!
@@ -62,28 +61,6 @@ class StoreDetails : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(this)
         mAdapter = ExampleAdapter(stores)
-        val exampleList = ArrayList<ExampleName>()
-        exampleList.add(
-            ExampleName(
-                R.mipmap.store,
-                "Walmart",
-                "Open : 10:00 AM",
-                "Close : 10:00 PM"
-            )
-        )
-        exampleList.add(ExampleName(R.mipmap.store, "Costco", "Open : 8:00 AM", "Close : 8:00 PM"))
-        exampleList.add(
-            ExampleName(
-                R.mipmap.store,
-                "Dollarama",
-                "Open : 10:00 AM",
-                "Close : 10:00 PM"
-            )
-        )
-        exampleList.add(ExampleName(R.mipmap.store, "Tim", "Open : 8:00 AM", "Close : 8:00 PM"))
-        recyclerView.setHasFixedSize(true)
-        mLayoutManager = LinearLayoutManager(this)
-        mAdapter = ExampleAdapter(exampleList)
         recyclerView.setLayoutManager(mLayoutManager)
         recyclerView.setAdapter(mAdapter)
     }
