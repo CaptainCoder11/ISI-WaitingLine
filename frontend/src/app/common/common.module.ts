@@ -5,17 +5,10 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
 import { WaitingListFirebaseService } from './services/waiting-list.firebase.service';
 
 @NgModule({
-  declarations: [
-  ],
-  imports: [
-    AngularCommonModule,
-    DialogModule
-  ],
+  declarations: [],
+  imports: [AngularCommonModule, DialogModule],
   providers: [StoreService, WaitingListFirebaseService],
   bootstrap: [],
-  exports: [
-    AngularCommonModule,
-    DialogModule
-  ]
+  exports: [AngularCommonModule, DialogModule],
 })
-export class CommonModule { }
+export class CommonModule {}
