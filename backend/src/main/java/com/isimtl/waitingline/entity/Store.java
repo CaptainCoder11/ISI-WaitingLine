@@ -1,4 +1,5 @@
 package com.isimtl.waitingline.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -7,12 +8,11 @@ import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Arrays;
 
-
 @Data
 @Entity
 @Table(name = "store")
 @AllArgsConstructor
-@JsonIgnoreProperties(value = {""})
+@JsonIgnoreProperties(value = { "" })
 public class Store implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class Store implements Serializable {
 
     @Lob
     @Column(name = "logo")
-    private byte[] logo;
+    private String logo;
 
     @Column(name = "opening_hour")
     private LocalTime openingHour;
@@ -56,7 +56,7 @@ public class Store implements Serializable {
                 ", storeCapacity=" + storeCapacity +
                 ", waitingCapacity=" + waitingCapacity +
                 ", category='" + category + '\'' +
-                ", logo=" + Arrays.toString(logo) +
+                ", logo=" + logo +
                 ", openingHour=" + openingHour +
                 ", closingHour=" + closingHour +
                 '}';
