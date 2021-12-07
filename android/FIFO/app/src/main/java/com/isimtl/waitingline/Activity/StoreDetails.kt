@@ -52,6 +52,10 @@ class StoreDetails : AppCompatActivity() {
             openActivity(QRScanActivity::class.java)
         }
 
+        btlogin.setOnClickListener {
+            openActivity(Login::class.java)
+        }
+
         initstores()
 
 

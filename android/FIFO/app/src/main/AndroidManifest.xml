@@ -19,6 +19,11 @@
         </activity>
 
         <activity
+            android:name="com.isimtl.waitingline.Activity.Login"
+            android:theme="@style/Theme.Design.NoActionBar">
+        </activity>
+
+        <activity
             android:name="com.isimtl.waitingline.Activity.StoreDetails"
             android:exported="true">
             <intent-filter>

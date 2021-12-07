@@ -2,4 +2,8 @@
     <string name="app_name">FIFO</string>
     <string name="course_name">A</string>
     <string name="course_rating">B</string>
+    <string name="editName"><b>Enter Your Name</b></string>
+    <string name="editEmail"><b>Enter Email Here</b></string>
+    <string name="editPhone"><b>Enter Phone Number</b></string>
+    <string name="submitButton"><b>Submit</b></string>
 </resources>

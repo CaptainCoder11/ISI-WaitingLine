@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:padding="@dimen/_7sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/homeback"
+            android:layout_margin="@dimen/_4sdp"
+            android:src="@mipmap/close"
+            android:padding="@dimen/_15sdp"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_alignParentRight="true"></ImageView>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:padding="@dimen/_7sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_main"
+            android:layout_width="@dimen/_170sdp"
+            android:layout_height="@dimen/_170sdp"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="login.json"
+            app:lottie_loop="true" app:lottie_speed="1"
+            android:layout_centerInParent="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+    </RelativeLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:hint="Enter Email Here"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/_4sdp"
+        android:background="@drawable/rounded_button"
+        android:orientation="horizontal"
+        android:padding="@dimen/_7sdp"
+        android:layout_marginBottom="@dimen/_10sdp">
+
+
+        <EditText
+            android:id="@+id/email_edit"
+            android:layout_width="@dimen/_240sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="center_horizontal"
+            android:hint="@string/editEmail"
+            android:padding="@dimen/_4sdp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"></EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/_4sdp"
+        android:background="@drawable/rounded_button"
+        android:orientation="horizontal"
+        android:padding="@dimen/_7sdp"
+        android:layout_marginBottom="@dimen/_10sdp">
+
+
+        <EditText
+            android:id="@+id/phone_edit"
+            android:layout_width="@dimen/_240sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="center_horizontal"
+            android:hint="@string/editPhone"
+            android:padding="@dimen/_4sdp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"></EditText>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:padding="@dimen/_7sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp">
+
+        <Button
+            android:id="@+id/btsubmit"
+            android:layout_width="@dimen/_115sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/rounded_button"
+            android:text="@string/submitButton"
+            android:textAllCaps="false"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/_17ssp"></Button>
+    </RelativeLayout>
+
+
+</LinearLayout>
