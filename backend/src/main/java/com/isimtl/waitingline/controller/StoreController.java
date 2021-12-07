@@ -1,6 +1,5 @@
 package com.isimtl.waitingline.controller;
 
-import com.isimtl.waitingline.dto.StoreDTO;
 import com.isimtl.waitingline.entity.Store;
 import com.isimtl.waitingline.service.IStoreService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +23,12 @@ public class StoreController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<StoreDTO>> getAll() {
+    public ResponseEntity<List<Store>> getAll()  {
         return ResponseEntity.ok(this.storeService.findAll());
     }
 
     @GetMapping("/{id}")
-    public Store getById(@PathVariable("id") int id) {
-        return storeService.findById(id);
+    public ResponseEntity<Store> getById(@PathVariable("id") int id) {
+        return ResponseEntity.ok(storeService.findById(id));
     }
 }

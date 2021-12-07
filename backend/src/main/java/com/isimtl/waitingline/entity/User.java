@@ -1,5 +1,6 @@
 package com.isimtl.waitingline.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,18 +24,21 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "password_hash")
-    private String password_hash;
+    private String passwordHash;
 
     @Column(name = "password_salt")
-    private String password_salt;
+    private String passwordSalt;
 
     @Column(name = "otp")
     private String otp;
 
     @Column(name = "otp_expiry")
-    private LocalDateTime otp_expiry;
+    private LocalDateTime otpExpiry;
 
     @Column(name = "date_added")
-    private LocalDateTime dateTime;
+    private LocalDateTime dateAdded;
 }

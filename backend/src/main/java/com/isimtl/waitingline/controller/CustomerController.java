@@ -1,20 +1,20 @@
 package com.isimtl.waitingline.controller;
 
 
-import com.isimtl.waitingline.dto.StoreDTO;
-import com.isimtl.waitingline.dto.UserDTO;
 import com.isimtl.waitingline.entity.User;
 import com.isimtl.waitingline.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
+
 
     ICustomerService customerService;
 
@@ -24,19 +24,23 @@ public class CustomerController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<UserDTO>> getAll() {
+    public ResponseEntity<List<User>> getAll() {
         return ResponseEntity.ok(this.customerService.findAll());
-
     }
 
     @PostMapping("/login")
-    public User loginCustomer(@RequestBody User user) {
-        customerService.save(user);
-        return user;
+    public ResponseEntity<User> loginCustomer(@RequestBody User user) {
+        try {
+            User User =  customerService.save(user);
+            return ResponseEntity.ok(User);
+        } catch (IOException e) {
+            new RuntimeException("Internal server error Please try after some time.");
+        }
+        return null;
     }
 
     @PostMapping("/verify")
-    public void verifyCustomer() {
-
+    public ResponseEntity<User> verifyCustomer(@RequestBody User user){
+        return ResponseEntity.ok(customerService.verify(user));
     }
 }

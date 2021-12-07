@@ -1,13 +1,11 @@
 package com.isimtl.waitingline.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.Arrays;
-
-import java.sql.Time;
 
 
 @Data
@@ -41,10 +39,10 @@ public class Store implements Serializable {
     private byte[] logo;
 
     @Column(name = "opening_hour")
-    private Time openingHour;
+    private LocalTime openingHour;
 
     @Column(name = "closing_hour")
-    private Time closingHour;
+    private LocalTime closingHour;
 
     public Store() {
     }

@@ -1,15 +1,17 @@
 package com.isimtl.waitingline.service;
 
-import com.isimtl.waitingline.dto.UserDTO;
 import com.isimtl.waitingline.entity.User;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ICustomerService {
 
-    public List<UserDTO> findAll();
+    public List<User> findAll();
 
-    public UserDTO findById(int id);
+    public User findById(int id);
 
-    public void save(User user);
+    public User save(User user) throws IOException;
+
+    public User verify(User user);
 }
