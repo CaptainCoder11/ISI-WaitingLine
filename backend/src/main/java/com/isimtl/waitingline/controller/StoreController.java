@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 
@@ -19,7 +18,6 @@ public class StoreController {
 
     private final IStoreService storeService;
 
-
     @Autowired
     public StoreController(IStoreService storeService) {
         this.storeService = storeService;
@@ -28,14 +26,10 @@ public class StoreController {
     @GetMapping("")
     public ResponseEntity<List<StoreDTO>> getAll() {
         return ResponseEntity.ok(this.storeService.findAll());
-
     }
-
 
     @GetMapping("/{id}")
-    public Store getById(@PathVariable("id") UUID id){
+    public Store getById(@PathVariable("id") int id) {
         return storeService.findById(id);
     }
-
-
 }

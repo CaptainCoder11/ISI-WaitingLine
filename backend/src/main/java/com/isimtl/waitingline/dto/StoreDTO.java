@@ -2,16 +2,17 @@ package com.isimtl.waitingline.dto;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Time;
 import java.util.Arrays;
-import java.util.UUID;
 
 
 @Data
 public class StoreDTO {
 
-    private UUID id;
+    private int id;
     private String name;
     private String address;
 

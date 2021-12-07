@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 @Slf4j
 
 @Service
@@ -39,8 +38,8 @@ public class StoreServiceImpl implements IStoreService {
 
     @Override
     @Transactional
-    public Store findById(UUID id) {
-        Optional<Store> result = storeRepository.findById(id);
+    public Store findById(int id) {
+        Optional<Store> result = storeRepository.findById(Integer.valueOf(id));
         Store store = null;
         if (result.isPresent())
             store = result.get();

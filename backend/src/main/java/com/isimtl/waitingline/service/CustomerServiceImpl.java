@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class CustomerServiceImpl implements ICustomerService{
@@ -33,7 +32,7 @@ public class CustomerServiceImpl implements ICustomerService{
         return userMapper.toDto(user);    }
 
     @Override
-    public UserDTO findById(UUID id) {
+    public UserDTO findById(int id) {
         return null;
     }
 
