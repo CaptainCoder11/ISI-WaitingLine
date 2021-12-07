@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.mukesh.OtpView
+        android:id="@+id/otp_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:inputType="number"
+        android:itemBackground="@color/white"
+        android:textColor="@color/black"
+        app:OtpItemCount="6"
+        android:paddingLeft="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_15sdp"
+        app:OtpLineColor="@color/white"
+        />
+
+    <Button
+        android:id="@+id/btverify"
+        android:layout_below="@+id/otp_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_37sdp"
+        android:textColor="@color/black"
+        android:layout_width="@dimen/_115sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/rounded_button_white"
+        android:text="Verify"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_17ssp"></Button>
+
+</RelativeLayout>
