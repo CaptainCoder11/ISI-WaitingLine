@@ -1,5 +1,6 @@
 package com.isimtl.waitingline.service;
 
+import com.isimtl.waitingline.Exception.OtpException;
 import com.isimtl.waitingline.Utils.Utils;
 import com.isimtl.waitingline.entity.User;
 import com.isimtl.waitingline.repository.UserRepository;
@@ -46,9 +47,9 @@ public class CustomerServiceImpl implements ICustomerService {
     public User save(User user) throws IOException {
         Optional<User> tempUser = userRepository.findByEmail(user.getEmail());
         if (tempUser.isPresent()) {
-            if ((tempUser.get().getPhone() != null) && (user.getPhone() != null) && tempUser.get().getPhone() != user.getPhone()) {
+            if (tempUser.get().getPhone() != user.getPhone()) {
                 try {
-                    String phone = user.getPhone().equals("") ? tempUser.get().getPhone() : user.getPhone();
+                    String phone = user.getPhone() == null ? tempUser.get().getPhone() : user.getPhone();
                     user.setPhone(phone);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -69,4 +70,28 @@ public class CustomerServiceImpl implements ICustomerService {
         return user;
     }
 
+    @Override
+    public User verify(User user) {
+        System.out.println(user);
+        User tempUser = (findById(user.getId()));
+        System.out.println(tempUser);
+        if (tempUser.getOtp() != null && tempUser.getOtpExpiry() != null) {
+            boolean isValidOtp = (LocalDateTime.now()).until(tempUser.getOtpExpiry(), ChronoUnit.MINUTES) > 0;
+            boolean isUserVefiry = user.getOtp().equals(tempUser.getOtp());
+            if (isValidOtp) {
+                if (!isUserVefiry)
+                    throw new OtpException("Invalid Otp");
+                else {
+                    tempUser.setOtp(null);
+                    tempUser.setOtpExpiry(null);
+                }
+            } else {
+                throw new OtpException("OTP is expired");
+            }
+        } else
+            throw new OtpException("Invalid OTP");
+
+        userRepository.save(tempUser);
+        return (tempUser);
+    }
 }

@@ -34,9 +34,14 @@ public class CustomerController {
             User User =  customerService.save(user);
             return ResponseEntity.ok(User);
         } catch (IOException e) {
-            new RuntimeException("Internal server error Please try after some time.");
+            new RuntimeException(e);
         }
         return null;
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<User> verifyCustomer(@RequestBody User user){
+        return ResponseEntity.ok(customerService.verify(user));
     }
 
 }

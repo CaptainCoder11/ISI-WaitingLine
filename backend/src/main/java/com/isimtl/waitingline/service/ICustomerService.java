@@ -9,7 +9,6 @@ public interface ICustomerService {
 
     public List<User> findAll();
     public User findById(int id);
-
-
     public User save(User user) throws IOException;
+    public User verify(User user);
 }

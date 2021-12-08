@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.time.LocalTime;
 
 
-
 @Data
 @Entity
 @Table(name = "store")
