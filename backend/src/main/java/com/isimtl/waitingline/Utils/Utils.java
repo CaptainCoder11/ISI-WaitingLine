@@ -8,7 +8,6 @@ public class Utils {
         int len = 6;
         String numbers = "0123456789";
 
-        // Using random method
         Random rndm_method = new Random();
 
         char[] otp = new char[len];

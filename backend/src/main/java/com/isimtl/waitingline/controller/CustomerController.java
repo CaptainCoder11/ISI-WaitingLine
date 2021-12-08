@@ -39,8 +39,4 @@ public class CustomerController {
         return null;
     }
 
-    @PostMapping("/verify")
-    public ResponseEntity<User> verifyCustomer(@RequestBody User user){
-        return ResponseEntity.ok(customerService.verify(user));
-    }
 }

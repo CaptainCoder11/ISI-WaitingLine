@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ public class CustomerServiceImpl implements ICustomerService {
     private MailService mailService;
 
     @Autowired
-    public CustomerServiceImpl(UserRepository userRepository,  MailService mailService) {
+    public CustomerServiceImpl(UserRepository userRepository, MailService mailService) {
         this.userRepository = userRepository;
         this.mailService = mailService;
     }
@@ -45,46 +44,29 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public User save(User user) throws IOException {
-
-        if (userRepository.userExist(user.getEmail(), user.getPhone())) {
-            User tempUser = userRepository.getUser(user.getEmail(), user.getPhone());
-            System.out.println(tempUser);
-            user.setId(tempUser.getId());
-            user.setEmail(tempUser.getEmail());
-            user.setPhone(tempUser.getPhone());
-            user.setDateAdded(tempUser.getDateAdded());
+        Optional<User> tempUser = userRepository.findByEmail(user.getEmail());
+        if (tempUser.isPresent()) {
+            if (tempUser.get().getPhone() != user.getPhone()) {
+                try {
+                    user.setId(tempUser.get().getId());
+                    user.setEmail(tempUser.get().getEmail());
+                    String phone = user.getPhone().equals("") ? tempUser.get().getPhone() : user.getPhone();
+                    user.setPhone(phone);
+                    user.setDateAdded(tempUser.get().getDateAdded());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
         } else {
-            System.out.println(user);
             user.setDateAdded(LocalDateTime.now());
             user.setId(0);
         }
-
         String otp = Utils.getOTP();
         user.setOtp(otp);
         user.setOtpExpiry(LocalDateTime.now().plusMinutes(10));
         mailService.sendTextEmail(otp, user.getEmail());
         userRepository.save(user);
-        return (user);
+        return user;
     }
 
-    @Override
-    public User verify(User user) {
-        User tempUser = (findById(user.getId()));
-        System.out.println(tempUser);
-        if (tempUser.getOtp() != null && tempUser.getOtpExpiry() != null) {
-            boolean isUserVefiry = user.getOtp().equals(tempUser.getOtp());
-            boolean isValidOtp = (LocalDateTime.now()).until(tempUser.getOtpExpiry(), ChronoUnit.MINUTES) > 0;
-            if (isValidOtp) {
-                if (!isUserVefiry)
-                    System.out.println("Invalid OTP");
-                else
-                    System.out.println("Verification Done");
-            } else {
-                System.out.println("OTP Expire");
-            }
-        } else
-            System.out.println("Invalid OTP. Try to login again");
-
-        return (tempUser);
-    }
 }
