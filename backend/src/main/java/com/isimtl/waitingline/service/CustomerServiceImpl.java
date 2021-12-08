@@ -46,17 +46,17 @@ public class CustomerServiceImpl implements ICustomerService {
     public User save(User user) throws IOException {
         Optional<User> tempUser = userRepository.findByEmail(user.getEmail());
         if (tempUser.isPresent()) {
-            if (tempUser.get().getPhone() != user.getPhone()) {
+            if ((tempUser.get().getPhone() != null) && (user.getPhone() != null) && tempUser.get().getPhone() != user.getPhone()) {
                 try {
-                    user.setId(tempUser.get().getId());
-                    user.setEmail(tempUser.get().getEmail());
                     String phone = user.getPhone().equals("") ? tempUser.get().getPhone() : user.getPhone();
                     user.setPhone(phone);
-                    user.setDateAdded(tempUser.get().getDateAdded());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
+            user.setEmail(tempUser.get().getEmail());
+            user.setId(tempUser.get().getId());
+            user.setDateAdded(tempUser.get().getDateAdded());
         } else {
             user.setDateAdded(LocalDateTime.now());
             user.setId(0);
