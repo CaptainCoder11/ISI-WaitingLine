@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CustomerExceptionHandler {
 
-    @ExceptionHandler
+    /*@ExceptionHandler
     public ResponseEntity<ErrorResponse> handleException(Exception exc)
     {
-        ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),exc.getMessage());
+        ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(),exc.getLocalizedMessage());
         return new ResponseEntity<>(error,HttpStatus.BAD_REQUEST);
-    }
+    }*/
 
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleException(NotFoundException exc)

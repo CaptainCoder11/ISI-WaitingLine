@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.Arrays;
+
 
 
 @Data
@@ -36,7 +36,7 @@ public class Store implements Serializable {
 
     @Lob
     @Column(name = "logo")
-    private byte[] logo;
+    private String logo;
 
     @Column(name = "opening_hour")
     private LocalTime openingHour;
@@ -56,7 +56,7 @@ public class Store implements Serializable {
                 ", storeCapacity=" + storeCapacity +
                 ", waitingCapacity=" + waitingCapacity +
                 ", category='" + category + '\'' +
-                ", logo=" + Arrays.toString(logo) +
+                ", logo=" + (logo) +
                 ", openingHour=" + openingHour +
                 ", closingHour=" + closingHour +
                 '}';
