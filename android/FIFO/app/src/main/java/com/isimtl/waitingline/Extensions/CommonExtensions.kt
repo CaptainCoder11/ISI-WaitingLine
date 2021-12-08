@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.isimtl.waitingline.EventBus.MessageEvent
 import org.greenrobot.eventbus.EventBus
 
@@ -32,6 +33,11 @@ fun View.show(){
 
 fun View.hide(){
     this.visibility = View.INVISIBLE
+}
+
+fun Context.toast(str: String)
+{
+    Toast.makeText(this,str,Toast.LENGTH_LONG).show()
 }
 
 fun View.font(font: String) {

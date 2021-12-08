@@ -1,7 +1,6 @@
 package com.isimtl.waitingline.Adapter
 
 import java.util.ArrayList
-import com.isimtl.waitingline.Models.ExampleName
 import androidx.recyclerview.widget.RecyclerView
 import com.isimtl.waitingline.Adapter.ExampleAdapter.ExampleViewHolder
 import android.view.ViewGroup
