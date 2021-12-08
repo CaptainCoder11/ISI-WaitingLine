@@ -4,10 +4,7 @@ package com.isimtl.waitingline.controller;
 import com.isimtl.waitingline.entity.FBUser;
 import com.isimtl.waitingline.service.FBUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.ExecutionException;
 
@@ -20,6 +17,11 @@ public class TestController {
     @Autowired
     public TestController(FBUserService fbUserService) {
         this.fbUserService = fbUserService;
+    }
+
+    @GetMapping("/version")
+    public String version(){
+        return "V 1.0";
     }
 
     @PostMapping("/firebase/add")
