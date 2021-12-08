@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
 body {
-    background-color: #f8f9fc;
+    background-color: #b9c1cc;
+    height: 100%;
 }
 
 .card-header {
@@ -26,12 +28,158 @@ body {
     border-left: 0.25rem solid #f6c23e !important;
 }
 
+footer {
+    background: #fff;
+    ;
+}
+
 footer.sticky-footer {
     margin-top: 20px;
     padding: 2rem 0;
     flex-shrink: 0;
 }
+
 footer.sticky-footer .copyright {
     line-height: 1;
     font-size: 0.8rem;
+}
+
+img.store-logo {
+    width: 100%;
+    height: 200px;
+}
+
+.badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.badge-info {
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+.badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+
+/* -------------- Style for kendo custome blue theme -------------- */
+
+.k-button-primary:focus,
+.k-button.k-primary:focus,
+.k-button-primary.k-state-focus,
+.k-state-focus.k-button.k-primary,
+.k-button-primary.k-state-focused,
+.k-state-focused.k-button.k-primary {
+    box-shadow: 0 0 0 2px rgb(180 205 252 / 30%);
+}
+
+.k-button-primary,
+.k-button.k-primary,
+.k-dialog-titlebar {
+    color: #ffffff !important;
+    border-color: #0D6EFD !important;
+    background-color: #0D6EFD !important;
+}
+
+.k-pager-numbers .k-link.k-state-selected,
+.k-pager-numbers .k-link:hover,
+.k-pager-numbers .k-link.k-state-hover {
+    color: #0D6EFD;
+    background-color: rgb(180 205 252);
+}
+
+.k-grid td.k-state-selected,
+.k-grid tr.k-state-selected>td {
+    background-color: rgb(180 205 252);
+}
+
+.k-pager-numbers .k-link {
+    color: #0D6EFD;
+}
+
+
+/*** New Blue theme color ****/
+
+.bg-blue,
+.bg-blue:hover {
+    background: #436cba;
+    color: #fff !important;
+}
+
+.button-blue,
+.button-blue:hover {
+    background: #436cba;
+    color: #fff !important;
+}
+
+.button-light,
+.button-light:hover {
+    background: #5bc0de;
+    color: #fff !important;
+}
+
+.button-green,
+.button-green:hover {
+    background: #28a745;
+    color: #fff !important;
+}
+
+.button-red,
+.button-red:hover {
+    background: #fd1818;
+    color: #fff !important;
+}
+
+.button-orange,
+.button-orange:hover {
+    background: #ff6358;
+    color: #fff !important;
+}
+
+.button-warning,
+.button-warning:hover {
+    background: #ffc107;
+    color: #000 !important;
+    border-color: #eea236;
+}
+
+.button-gray {
+    background: #ccc;
+    color: #000 !important;
+}
+
+.button-yellow,
+.button-yellow:hover {
+    background: #f3e24d;
+    border-color: #dac400;
+    color: #9e9e9e !important;
+}
+
+.button-rosybrown,
+.button-rosybrown:hover {
+    background-color: #bf7d7d !important;
+    border-color: #966f6f !important;
+    color: #fff !important;
+}
+
+.card .card-header {
+    background-color: #0D6EFD;
+    color: #fff;
+}
+
+.navbar {
+    background: #fff;
+}
+
+.navbar-brand {
+    border: 1px solid #dedfe0;
+    padding: 0px 15px;
 }

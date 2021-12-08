@@ -1,78 +1,74 @@
 <app-customer-header></app-customer-header>
 <div class="container-fluid">
-  <div class="card">
-    <div class="card-header py-2">
-      Waiting
-    </div>
-    <div class="card-body">
-      <div class="row d-flex align-items-center">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top"
-              data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-              alt="Thumbnail [100%x225]" style="height:180px; width: 100%; display: block;"
-              src="https://i.pinimg.com/736x/f6/d0/af/f6d0af482a5a1116dbbd2fd3ff95e58c.jpg" data-holder-rendered="true">
-            <div class="card-body">
-              <p class="card-text">
-                <label class="text-center d-block">Store Name</label>
-              </p>
-            </div>
-          </div>
-        </div>
+    <div class="card" *ngIf="customerWaiting">
+        <div class="card-body">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" [src]="DISPLAY_LOGO(customerWaiting.storeLogo)" height="100px" width="100%">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <label class="text-center d-block">{{customerWaiting.storeName}}</label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="col-md-9">
-          <div class="row text-center">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>Estimated Time</h3>
-              <h5>30 Mintues </h5>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <h3>Queue Number</h3>
-              <h5 class="number-circle">
-                20
-              </h5>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <button class="btn btn-primary">
+                <div class="col-md-9">
+                    <div class="row text-center">
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <h3>Estimated Time</h3>
+                            <h5>{{customerWaiting.estimatedTime}} </h5>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <h3>Queue Number</h3>
+                            <h5 class="number-circle">
+                                {{customerWaiting.queueNumber}}
+                            </h5>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <button class="btn btn-primary">
                 Get Removed From Waiting
               </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <div class="row mt-3">
-    <div class="col-md-12">
-      <div class="col-md-3 offset-md-9 pb-2">
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          placeholder="Search Store">
-      </div>
-    </div>
-    <div class="col-md-4" *ngFor="let store of (stores$|async)">
-      <div class="card mb-4 box-shadow" (click)="showStoreDetails(store)">
-        <img class="card-img-top"
-          data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-          alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
-          src="https://media.istockphoto.com/vectors/abstract-business-arrow-up-logo-icon-vector-design-template-vector-id1140553971?k=20&m=1140553971&s=612x612&w=0&h=7-a1JjWAf8c5qKF46FRgdFg-3jva9qo80hqh0z_Y34A="
-          data-holder-rendered="true">
-        <div class="card-body">
-          <p class="card-text">
-            <label class="text-center d-block">{{store.name}}</label>
-          </p>
+    <div class="row mt-3">
+        <div class="col-md-12 mb-4">
+            <div class="col-md-3 offset-md-9 pb-2">
+                <input type="email" class="form-control" placeholder="Search Store" (input)="onSearch($event)">
+            </div>
         </div>
-        <div class="card-footer text-muted">
-          <div class="d-flex justify-content-between">
-            <span class="text-capitalize font-weight-normal">Open: {{store.openingHour}}
-            </span>
-            <span class="text-capitalize font-weight-normal"> Close: {{store.closingHour}}</span>
-          </div>
-        </div>
-      </div>
+        <ng-container *ngIf="stores && stores.length;else noStore">
+            <div class="col-md-3 store-card" *ngFor="let store of stores">
+                <div class="card mb-4 box-shadow cursor-pointer" (click)="showStoreDetails(store)">
+                    <img class="card-img-top store-logo" [src]="DISPLAY_LOGO(store.logo)" data-holder-rendered="true">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <label class="text-center d-block">{{store.name}}</label>
+                        </p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div class="d-flex justify-content-between">
+                            <span class="badge badge-success text-capitalize">Open: {{store.openingHour}}</span>
+                            <span class="badge badge-danger text-capitalize"> Close: {{store.closingHour}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
     </div>
-  </div>
 </div>
 <app-customer-footer></app-customer-footer>
-
+<ng-template #noStore>
+    <div class="col-md-12">
+        <div class="alert alert-danger text-center" role="alert">
+            No store found!!!
+        </div>
+    </div>
+</ng-template>
 <div kendoDialogContainer></div>

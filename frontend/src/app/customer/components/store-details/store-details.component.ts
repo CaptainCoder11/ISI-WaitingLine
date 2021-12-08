@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DialogRef } from '@progress/kendo-angular-dialog';
-import * as moment from 'moment';
 import { Store } from 'src/app/common/models/store.model';
+import { DISPLAY_LOGO, DISPLAY_STORE_STATUS } from 'src/app/common/utils/functions';
 
 @Component({
   selector: 'app-customer-store-details',
@@ -9,6 +9,8 @@ import { Store } from 'src/app/common/models/store.model';
   styleUrls: ['./store-details.component.css']
 })
 export class CustomerStoreDetailsComponent implements OnInit {
+  DISPLAY_LOGO = DISPLAY_LOGO;
+  DISPLAY_STORE_STATUS = DISPLAY_STORE_STATUS;
 
   @Input() store: Store;
   constructor(private dialog: DialogRef) { }
@@ -20,28 +22,7 @@ export class CustomerStoreDetailsComponent implements OnInit {
     this.closeForm();
   }
 
-  /**
-  * This function will invoke when user press "X" button on user form
-  */
   closeForm(): void {
     this.dialog.close();
-  }
-
-  public get calc(){
-    var openingHourStr=this.store.openingHour.split(':');
-    var openingHourDate=new Date().setHours(parseInt(openingHourStr[0]),parseInt(openingHourStr[1]),parseInt(openingHourStr[2]));
-    var openingTime=moment(openingHourDate).format("HH:mm:ss");
-
-    var closingHourStr=this.store.closingHour.split(':');
-    var closingHourDate=new Date().setHours(parseInt(closingHourStr[0]),parseInt(closingHourStr[1]),parseInt(closingHourStr[2]));
-    var closingTime=moment(closingHourDate).format("HH:mm:ss");
-
-    var todayDate=new Date();
-    var todayTime=moment(todayDate).format("HH:mm:ss");
-
-    if(todayTime>=openingTime && todayTime<closingTime){
-      return "Store is open";
-    }
-    return "Store is closed";
   }
 }

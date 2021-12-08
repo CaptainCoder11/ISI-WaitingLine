@@ -1,8 +1,17 @@
 .number-circle {
-  border-radius: 50%;
-  padding: 10px;
-  border: 1px solid #666;
-  color: #666;
-  text-align: center;
-  display: inline-block;
+    border-radius: 50%;
+    padding: 10px;
+    border: 1px solid #666;
+    color: #666;
+    text-align: center;
+    display: inline-block;
+}
+
+.store-card {
+    cursor: pointer;
+}
+
+.store-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }

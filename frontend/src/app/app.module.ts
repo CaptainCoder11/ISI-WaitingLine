@@ -8,6 +8,7 @@ import { ErrorsComponent } from './common/pages/errors/errors.component';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+import { CommonModule } from './common/common.module';
 
 @NgModule({
   declarations: [AppComponent, ErrorsComponent],
@@ -16,6 +17,7 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    CommonModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
   ],

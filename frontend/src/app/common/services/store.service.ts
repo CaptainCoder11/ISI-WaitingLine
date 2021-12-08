@@ -10,8 +10,8 @@ export class StoreService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(): Observable<Array<Store>> {
-    return this.httpClient.get<Array<Store>>(this._url);
+  getAll(): Observable<Store[]> {
+    return this.httpClient.get<Store[]>(this._url);
   }
 
   getById(id: number): Observable<Store> {
