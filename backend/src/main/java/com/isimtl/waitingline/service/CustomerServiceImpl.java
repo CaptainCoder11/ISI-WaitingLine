@@ -65,7 +65,8 @@ public class CustomerServiceImpl implements ICustomerService {
         String otp = Utils.getOTP();
         user.setOtp(otp);
         user.setOtpExpiry(LocalDateTime.now().plusMinutes(10));
-        mailService.sendTextEmail(otp, user.getEmail());
+
+        mailService.sendTextEmail(otp, user.getEmail(),user.getVerificationData());
         userRepository.save(user);
         return user;
     }

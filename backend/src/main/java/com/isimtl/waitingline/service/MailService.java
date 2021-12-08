@@ -24,6 +24,9 @@ import com.sendgrid.SendGrid;
 public class MailService {
     private static final Logger logger = LoggerFactory.getLogger(MailService.class);
 
+    @Value("${VERIFICATION_URL}")
+    private String verificationURL;
+
     @Value("${SENDGRID_API_KEY}")
     private String sendgridKey;
 
@@ -33,7 +36,7 @@ public class MailService {
     @Value("${TEMPLATE_ID}")
     private String templateId;
 
-    public String sendTextEmail(String otp, String email) throws IOException {
+    public String sendTextEmail(String otp, String email,String userData) throws IOException {
             // the sender email should be the same as we used to Create a Single Sender Verification
             Email from = new Email(emailFrom);
             Email to = new Email(email);
@@ -45,7 +48,8 @@ public class MailService {
             mail.setFrom(from);
             mail.setSubject("Login Verification");
             // This is the first_name variable that we created on the template
-            personalization.addDynamicTemplateData("VERIFICATION_CODE", otp);
+        personalization.addDynamicTemplateData("VERIFICATION_CODE", otp);
+        personalization.addDynamicTemplateData("VERIFICATION_URL", verificationURL+userData);
             mail.addPersonalization(personalization);
             mail.setTemplateId(templateId);
             // this is the api key
