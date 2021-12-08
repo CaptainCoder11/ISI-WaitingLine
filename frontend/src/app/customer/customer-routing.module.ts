@@ -12,6 +12,10 @@ const routes: Routes = [
     component: CustomerLoginComponent,
   },
   {
+    path: 'login/:id/:name/:email/:phone/:otp',
+    component: CustomerLoginComponent,
+  },
+  {
     path: 'dashboard',
     component: CustomerHomeComponent
   }];

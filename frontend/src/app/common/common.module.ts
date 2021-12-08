@@ -5,13 +5,14 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
 import { WaitingListFirebaseService } from './services/waiting-list.firebase.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsModule } from '@angular/forms';
+import { AuthenticationService } from './services/authentication.service';
 
 
 @NgModule({
   declarations: [
   ],
   imports: [AngularCommonModule, DialogModule, NgxSpinnerModule, FormsModule],
-  providers: [StoreService, WaitingListFirebaseService],
+  providers: [StoreService, WaitingListFirebaseService, AuthenticationService],
   bootstrap: [],
   exports: [AngularCommonModule, DialogModule, NgxSpinnerModule, FormsModule],
 })

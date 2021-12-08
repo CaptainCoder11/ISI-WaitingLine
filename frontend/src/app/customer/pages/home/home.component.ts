@@ -4,9 +4,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, tap } from 'rxjs';
 import { CustomerWaiting } from 'src/app/common/models/customer-waiting.model';
 import { Store } from 'src/app/common/models/store.model';
+import { AuthenticationService } from 'src/app/common/services/authentication.service';
 import { StoreService } from 'src/app/common/services/store.service';
 import { WaitingListFirebaseService } from 'src/app/common/services/waiting-list.firebase.service';
 import { DISPLAY_LOGO } from 'src/app/common/utils/functions';
+import { convertTypeAcquisitionFromJson } from 'typescript';
 import { CustomerStoreDetailsComponent } from '../../components/store-details/store-details.component';
 
 @Component({
@@ -25,8 +27,8 @@ export class CustomerHomeComponent implements OnInit {
   constructor(private storeService: StoreService,
     private waitingListFirebaseService: WaitingListFirebaseService,
     private spinner: NgxSpinnerService,
+    public authService: AuthenticationService,
     private dialogService: DialogService) {
-
   }
 
   ngOnInit(): void {

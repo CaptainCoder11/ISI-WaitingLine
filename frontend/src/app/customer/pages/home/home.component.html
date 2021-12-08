@@ -1,11 +1,12 @@
 <app-customer-header></app-customer-header>
 <div class="container-fluid">
-    <div class="card" *ngIf="customerWaiting">
+    <div class="card" *ngIf="customerWaiting && this.authService.isAuthenticated()">
         <div class="card-body">
             <div class="row d-flex align-items-center">
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" [src]="DISPLAY_LOGO(customerWaiting.storeLogo)" height="100px" width="100%">
+                        <img class="card-img-top" [src]="DISPLAY_LOGO(customerWaiting.storeLogo)" height="100px"
+                            width="100%">
                         <div class="card-body">
                             <p class="card-text">
                                 <label class="text-center d-block">{{customerWaiting.storeName}}</label>
@@ -28,8 +29,8 @@
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <button class="btn btn-primary">
-                Get Removed From Waiting
-              </button>
+                                Get Removed From Waiting
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -13,9 +13,11 @@
         </div>
     </div>
     <div class="card-footer">
-        <div class="d-flex justify-content-between">
-            <input type="button" class="btn button-green m-3" value="Login to Join Waiting List" />
-            <input type="button" class="btn button-blue m-3" value="Join Waiting List" />
+        <div class="d-flex justify-content-center">
+            <a routerLink="/login" class="btn button-green m-3" *ngIf="!this.authService.isAuthenticated()">Login to
+                Join Waiting List</a>
+            <input type="button" class="btn button-blue m-3" value="Join Waiting List"
+                *ngIf="this.authService.isAuthenticated()" />
         </div>
     </div>
 </div>

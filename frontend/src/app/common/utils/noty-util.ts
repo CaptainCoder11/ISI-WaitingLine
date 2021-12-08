@@ -13,7 +13,7 @@ export class NotyUtil {
    * @param message 
    * @param timeout 
    */
-  public static success(message: string, timeout: number = 1500) {
+  public static success(message: string, timeout: number = 3000) {
     new Noty({
       theme: 'relax',
       closeWith: ['click', 'button'],
@@ -29,7 +29,7 @@ export class NotyUtil {
    * @param message 
    * @param timeout 
    */
-  public static warning(message: string, timeout: number = 3000) {
+  public static warning(message: string, timeout: number = 5000) {
     new Noty({
       theme: 'relax',
       closeWith: ['click', 'button'],
@@ -45,7 +45,7 @@ export class NotyUtil {
    * @param message 
    * @param timeout 
    */
-  public static error(message: string, timeout: number = 3000) {
+  public static error(message: string, timeout: number = 5000) {
     new Noty({
       theme: 'relax',
       closeWith: ['click', 'button'],

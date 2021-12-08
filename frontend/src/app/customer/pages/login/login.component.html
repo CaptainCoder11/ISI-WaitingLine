@@ -1,172 +1,88 @@
-<section>
-  <div class="container-fluid">
-    <div class="shadow-sm p-1 bg-body rounded">
-      <header
-        class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
-      >
-        <a
-          href="/"
-          class="
-            d-flex
-            align-items-center
-            mb-3 mb-md-0
-            me-md-auto
-            text-dark text-decoration-none
-          "
-        >
-          <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"></use>
-          </svg>
-          <span class="fs-4">FIFO</span>
-        </a>
-      </header>
-    </div>
-  </div>
-</section>
+<app-customer-header></app-customer-header>
+
 <section class="">
-  <div class="container py-5 h-100">
-    <div class="container-fluid">
-      <div
-        class="row d-flex justify-content-center align-items-center h-100 mt-1"
-      >
-        <div class="col col-xl-8 mt-3">
-          <div class="card" style="border-radius: 1rem">
-            <div class="row g-0">
-              <div class="col-md-12 col-lg-11 d-flex align-items-center">
-                <div class="card-body p-4 p-lg-3 text-black">
-                  <form
-                    [formGroup]="form"
-                    class="form-horizontal"
-                    (ngSubmit)="onSubmit()"
-                  >
-                    <div class="form-group row p-2">
-                      <label for="name" class="col-md-2 text-dark">Name</label>
-                      <div class="col-md-10 inline-block">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          formControlName="name"
-                          [ngClass]="{
-                            'is-invalid':
-                              getControl('name').invalid && submitted
-                          }"
-                        />
-                        <div
-                          *ngIf="getControl('name').invalid && submitted"
-                          class="alert alert-danger mt-2"
-                        >
-                          <div *ngIf="getControl('name').errors['required']">
-                            Name is required.
-                          </div>
+    <div class="container py-5 h-100">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center align-items-center h-100 mt-1">
+                <div class="col col-xl-6 mt-3">
+                    <div class="card" style="border-radius: 1rem">
+                        <div class="row g-0">
+                            <div class="col-md-12 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-3 text-black">
+                                    <form [formGroup]="form" class="form-horizontal">
+                                        <div class="form-group row p-2">
+                                            <label for="name" class="col-md-2 text-dark">Name</label>
+                                            <div class="col-md-10 inline-block">
+                                                <input type="text" class="form-control form-control-lg"
+                                                    formControlName="name" [readonly]="isOtp"
+                                                    [ngClass]="{'is-invalid': getControl('name').invalid && submitted }" />
+                                                <div *ngIf="getControl('name').invalid && submitted"
+                                                    class="alert alert-danger mt-2">
+                                                    <div *ngIf="getControl('name').errors['required']">
+                                                        Name is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row p-2">
+                                            <label for="email" class="col-md-2 text-dark">Email</label>
+                                            <div class="col-md-10 inline-block">
+                                                <input type="text" class="form-control form-control-lg"
+                                                    [readonly]="isOtp" formControlName="email"
+                                                    [ngClass]="{'is-invalid': getControl('email').invalid && submitted }" />
+                                                <div *ngIf="getControl('email').invalid && submitted && getControl('email').errors"
+                                                    class="alert alert-danger mt-2">
+                                                    <div *ngIf="getControl('email').errors['required']">
+                                                        Email is required
+                                                    </div>
+                                                    <div *ngIf="getControl('email').errors['email']">
+                                                        Invalid Email format
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row p-2">
+                                            <label for="phone" class="col-md-2 text-dark">Mobile</label>
+                                            <div class="col-md-10 inline-block">
+                                                <input type="text" class="form-control form-control-lg"
+                                                    [readonly]="isOtp" formControlName="phone" />
+                                                <div *ngIf="getControl('phone').invalid && getControl('phone').errors"
+                                                    class="alert alert-danger mt-2">
+                                                    <div *ngIf=" getControl('phone').errors?.['pattern'] ">
+                                                        Enter 10 digit Mobile Number
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group float-right p-1 clearfix">
+                                            <button type="submit" (click)="onSubmit()"
+                                                class=" btn btn-secondary btn-md btn-info btn-color text-white float-end me-2">
+                                                Submit
+                                            </button>
+                                        </div>
+                                        <div class="form-group d-flex p-2" *ngIf="isOtp">
+                                            <label for="emailField" class="col-md-2 text-dark">OTP</label>
+                                            <div class="col-md-10 inline-block">
+                                                <input type="number" class="form-control form-control-lg"
+                                                    formControlName="otp" />
+
+                                                <div *ngIf="getControl('otp').invalid && submitted && getControl('otp').errors"
+                                                    class="alert alert-danger mt-2">
+                                                    <div *ngIf=" getControl('otp').errors['required'] ">
+                                                        OTP is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                    <div class="form-group row p-2">
-                      <label for="email" class="col-md-2 text-dark"
-                        >Email</label
-                      >
-                      <div class="col-md-10 inline-block">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          formControlName="email"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              ((form.errors &&
-                                form.errors['emailOrPhoneRequired']) ||
-                                (getControl('email').errors &&
-                                  getControl('email').errors['email']))
-                          }"
-                        />
-
-                        <div
-                          *ngIf="getControl('email').invalid && submitted"
-                          class="alert alert-danger mt-2"
-                        >
-                          <div *ngIf="getControl('email').errors['email']">
-                            Invalid Email format
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group d-flex">
-                      <div class="col-md-12 inline-block text-center">Or</div>
-                    </div>
-
-                    <div class="form-group row p-2">
-                      <label for="mobile" class="col-md-2 text-dark"
-                        >Mobile</label
-                      >
-                      <div class="col-md-10 inline-block">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          formControlName="mobile"
-                          [ngClass]="{
-                            'is-invalid':
-                              submitted &&
-                              ((form.errors &&
-                                form.errors['emailOrPhoneRequired']) ||
-                                (getControl('mobile').errors &&
-                                  getControl('mobile').errors['mobile']))
-                          }"
-                        />
-                        <div
-                          *ngIf="
-                            submitted &&
-                            form.errors &&
-                            form.errors['emailOrPhoneRequired']
-                          "
-                          class="alert alert-danger mt-2"
-                        >
-                          Email or Mobile is required.
-                        </div>
-
-                        <!-- here check valid mobile -->
-                        <div
-                          *ngIf="getControl('mobile').invalid && submitted"
-                          class="alert alert-danger mt-2"
-                        >
-                          <div
-                            *ngIf="
-                            getControl('mobile').errors?.['pattern']
-                          "
-                          >
-                            Enter 10 digit Mobile Number
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group float-right p-1 clearfix">
-                      <button
-                        type="submit"
-                        class="
-                          btn btn-secondary btn-md btn-info btn-color
-                          text-white
-                          float-end
-                          me-2
-                        "
-                      >
-                        Submit
-                      </button>
-                    </div>
-                    <!-- <div class="form-group d-flex p-2">
-                      <label for="emailField" class="col-md-2 text-dark">OTP</label>
-                      <div class="col-md-10 inline-block">
-                        <input type="text" class="form-control form-control-lg" id="otpField" formControlName="otp"
-                          readonly />
-                      </div>
-                    </div> -->
-                  </form>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
