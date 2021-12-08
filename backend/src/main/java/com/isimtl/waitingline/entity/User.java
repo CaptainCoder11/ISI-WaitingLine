@@ -2,6 +2,7 @@ package com.isimtl.waitingline.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -37,7 +38,8 @@ public class User {
     @Column(name = "password_salt")
     private String passwordSalt;
 
-    @JsonIgnore
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "otp")
     private String otp;
 
