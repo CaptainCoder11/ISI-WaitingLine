@@ -53,6 +53,7 @@ CREATE TABLE `store_user` (
 INSERT INTO `store_user` VALUES (1,1,'Customer'),(2,1,'Store_Owner'),(2,2,'Store_Owner'),(3,1,'Employee');
 
 CREATE TABLE `appointment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `status` enum('In_Queue','In_Store','Cancelled','Rejected','Departed') NOT NULL,
@@ -60,7 +61,7 @@ CREATE TABLE `appointment` (
   `time_of_arrival` datetime DEFAULT NULL,
   `time_of_departure` datetime DEFAULT NULL,
   `date_created` datetime NOT NULL,
-  PRIMARY KEY (`user_id`,`store_id`),
+  PRIMARY KEY (`id`),
   KEY `appointment_store_storeid_FK_idx` (`store_id`),
   CONSTRAINT `appointment_store_storeid_FK` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`),
   CONSTRAINT `appointment_user_userid_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
