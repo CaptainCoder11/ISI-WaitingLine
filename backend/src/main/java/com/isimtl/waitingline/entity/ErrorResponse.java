@@ -1,19 +1,34 @@
 package com.isimtl.waitingline.entity;
 
+import java.util.Arrays;
+
 public class ErrorResponse {
     private int status;
     private String message;
-    private Exception exception;
+    private String stackTrace;
+    private String error;
 
     public ErrorResponse(int status, String message, Exception exception) {
         this.status = status;
         this.message = message;
-        this.exception = exception;
+        this.stackTrace = Arrays.toString(exception.getStackTrace());
+        this.error = message;
     }
 
-    public ErrorResponse(int status, String message) {
-        this.status = status;
-        this.message = message;
+    public String getError() {
+        return message;
+    }
+
+    public void setStackTrace(String stackTrace) {
+        this.stackTrace = stackTrace;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getStackTrace() {
+        return stackTrace;
     }
 
     public int getStatus() {
