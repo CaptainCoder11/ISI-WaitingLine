@@ -38,7 +38,6 @@ public class User {
     @Column(name = "password_salt")
     private String passwordSalt;
 
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "otp")
     private String otp;

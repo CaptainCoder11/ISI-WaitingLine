@@ -19,4 +19,17 @@ public class FBUser {
     private int storeId;
     private String storeLogo;
     private String storeName;
+
+
+    public FBUser(Store store, User user) {
+        email = user.getEmail();
+        estimatedTime = "20";
+        id = user.getId();
+        name = user.getName();
+        queueNumber = 5;
+        storeId = store.getId();
+        storeLogo = store.getLogo();
+        storeName = store.getName();
+
+    }
 }

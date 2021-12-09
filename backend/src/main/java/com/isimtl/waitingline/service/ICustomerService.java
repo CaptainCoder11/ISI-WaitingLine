@@ -4,6 +4,7 @@ import com.isimtl.waitingline.entity.User;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public interface ICustomerService {
 
@@ -11,4 +12,6 @@ public interface ICustomerService {
     public User findById(int id);
     public User save(User user) throws IOException;
     public User verify(User user);
+    public void joinWaitingLine(int userId, int storeId) throws ExecutionException, InterruptedException;
+    public void removeWaitingLine(int userId, int storeId) throws ExecutionException, InterruptedException;
 }

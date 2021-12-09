@@ -26,7 +26,7 @@ public class TestController {
 
     @PostMapping("/firebase/add")
     public String createUser(@RequestBody FBUser user ) throws InterruptedException, ExecutionException {
-        return fbUserService.savePatientDetails(user);
+        return fbUserService.save(user);
     }
 
 }

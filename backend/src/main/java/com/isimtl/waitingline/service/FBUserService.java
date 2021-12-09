@@ -11,9 +11,16 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class FBUserService {
-    public String savePatientDetails(FBUser patient) throws InterruptedException, ExecutionException {
+
+    public String save(FBUser user) throws InterruptedException, ExecutionException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("waiting_list").document(patient.getName()).set(patient);
+        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("waiting_list").document(user.getEmail()).set(user);
+        return collectionsApiFuture.get().getUpdateTime().toString();
+    }
+
+    public String delete(FBUser user) throws InterruptedException, ExecutionException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("waiting_list").document(user.getEmail()).set(user);
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
 }
