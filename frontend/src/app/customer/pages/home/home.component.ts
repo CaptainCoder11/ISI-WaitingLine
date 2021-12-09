@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable, tap } from 'rxjs';
 import { CustomerWaiting } from 'src/app/common/models/customer-waiting.model';
 import { Store } from 'src/app/common/models/store.model';
 import { AuthenticationService } from 'src/app/common/services/authentication.service';
 import { StoreService } from 'src/app/common/services/store.service';
 import { WaitingListFirebaseService } from 'src/app/common/services/waiting-list.firebase.service';
 import { DISPLAY_LOGO } from 'src/app/common/utils/functions';
-import { convertTypeAcquisitionFromJson } from 'typescript';
+import { NotyUtil } from 'src/app/common/utils/noty-util';
 import { CustomerStoreDetailsComponent } from '../../components/store-details/store-details.component';
 
 @Component({
@@ -40,7 +39,7 @@ export class CustomerHomeComponent implements OnInit {
     }, (error) => this.spinner.hide());
 
     this.waitingListFirebaseService.get().subscribe(waitingList => {
-      this.customerWaiting = waitingList.find(x => x.email == 'rahulmistry25425@gmail.com');
+      this.customerWaiting = waitingList.find(x => x.id == this.authService.getUser?.id);
     });
   }
 
@@ -51,6 +50,7 @@ export class CustomerHomeComponent implements OnInit {
     });
     const inputData = dialog.content.instance;
     inputData.store = model;
+    inputData.customerWaiting = this.customerWaiting;
 
     dialog.result.subscribe();
   }
@@ -63,5 +63,20 @@ export class CustomerHomeComponent implements OnInit {
     } else {
       this.stores = this.masterStoreList.filter(x => x.name.toLowerCase().includes(val.toLocaleLowerCase()));
     }
+  }
+
+  removeFromWaitingLine(storeId) {
+    const userId = this.authService.getUser.id;
+    this.spinner.show();
+    this.storeService.removeWaitingLine(userId, storeId).subscribe(() => {
+      this.spinner.hide();
+      NotyUtil.success("You have been removed from waiting line!");
+    }, (e) => {
+      this.spinner.hide();
+      const error = e.error.message || e.error.error;
+      NotyUtil.error(error);
+    }, () => {
+      this.spinner.hide();
+    });
   }
 }

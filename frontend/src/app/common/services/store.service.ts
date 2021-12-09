@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { filter, first, map, Observable, take } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Store } from '../models/store.model';
 import { environment } from 'src/environments/environment';
 
@@ -18,5 +18,15 @@ export class StoreService {
     return this.httpClient.get<Store>(this._url).pipe(
       map((x: any) => x[0]),
     );
+  }
+
+  joinWaitingLine(userId: number, storeId: number): Observable<any> {
+    const url = `${environment.api_url}/customer/join-waiting-line/${userId}/${storeId}`;
+    return this.httpClient.get<any>(url);
+  }
+
+  removeWaitingLine(userId: number, storeId: number): Observable<any> {
+    const url = `${environment.api_url}/customer/remove-waiting-line/${userId}/${storeId}`;
+    return this.httpClient.get<any>(url);
   }
 }

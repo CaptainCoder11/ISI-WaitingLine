@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/models/user.model';
 import { AuthenticationService } from 'src/app/common/services/authentication.service';
+import { NotyUtil } from 'src/app/common/utils/noty-util';
 
 @Component({
   selector: 'app-customer-header',
@@ -27,6 +28,7 @@ export class CustomerHeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+    NotyUtil.success("You are logged out!!!");
     this.router.navigate(['/']);
   }
 }
