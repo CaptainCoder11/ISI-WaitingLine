@@ -20,7 +20,7 @@ public class FBUserService {
 
     public String delete(FBUser user) throws InterruptedException, ExecutionException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("waiting_list").document(user.getEmail()).set(user);
+        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("waiting_list").document(user.getEmail()).delete();
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
 }
