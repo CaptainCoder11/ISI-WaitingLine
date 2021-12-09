@@ -44,7 +44,6 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.verify(user));
     }
 
-
     @GetMapping("/join-waiting-line/{userId}/{storeId}")
     public ResponseEntity<Boolean> joinWaitingList(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId) {
         try {
@@ -60,7 +59,7 @@ public class CustomerController {
     @GetMapping("/remove-waiting-line/{userId}/{storeId}")
     public ResponseEntity<Boolean> removeWaitingList(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId) {
         try {
-            customerService.joinWaitingLine(userId, storeId);
+            customerService.removeWaitingLine(userId, storeId);
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
