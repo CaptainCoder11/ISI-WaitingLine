@@ -2,9 +2,7 @@ package com.isimtl.waitingline.service;
 
 import com.isimtl.waitingline.Exception.OtpException;
 import com.isimtl.waitingline.Utils.Utils;
-import com.isimtl.waitingline.entity.FBUser;
-import com.isimtl.waitingline.entity.Store;
-import com.isimtl.waitingline.entity.User;
+import com.isimtl.waitingline.entity.*;
 import com.isimtl.waitingline.repository.StoreRepository;
 import com.isimtl.waitingline.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +21,16 @@ public class CustomerServiceImpl implements ICustomerService {
     private UserRepository userRepository;
     private StoreRepository storeRepository;
     private MailService mailService;
-
     private FBUserService fbUserService;
+    private IAppointmentService appointmentService;
 
     @Autowired
-    public CustomerServiceImpl(UserRepository userRepository, StoreRepository storeRepository, MailService mailService, FBUserService fbUserService) {
+    public CustomerServiceImpl(UserRepository userRepository, StoreRepository storeRepository, MailService mailService, FBUserService fbUserService, IAppointmentService appointmentService) {
         this.userRepository = userRepository;
         this.storeRepository = storeRepository;
         this.mailService = mailService;
         this.fbUserService = fbUserService;
+        this.appointmentService = appointmentService;
     }
 
     @Override
@@ -74,7 +73,7 @@ public class CustomerServiceImpl implements ICustomerService {
         String otp = Utils.getOTP();
         user.setOtp(otp);
         user.setOtpExpiry(LocalDateTime.now().plusMinutes(10));
-        mailService.sendTextEmail(otp, user.getEmail(),user.getVerificationData());
+        mailService.sendTextEmail(otp, user.getEmail(), user.getVerificationData());
         userRepository.save(user);
         return user;
     }
@@ -107,13 +106,18 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public void joinWaitingLine(int userId, int storeId) throws ExecutionException, InterruptedException {
         FBUser fbUser = getFbUser(userId, storeId);
+        appointmentService.save(getAppointmentDetail(fbUser));
         fbUserService.save(fbUser);
     }
 
     @Override
     public void removeWaitingLine(int userId, int storeId) throws ExecutionException, InterruptedException {
-        FBUser fbUser = getFbUser(userId, storeId);
-        fbUserService.delete(fbUser);
+        try {
+            FBUser fbUser = getFbUser(userId, storeId);
+            fbUserService.delete(fbUser);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private FBUser getFbUser(int userId, int storeId) {
@@ -124,7 +128,6 @@ public class CustomerServiceImpl implements ICustomerService {
         else
             throw new RuntimeException("Invalid Store");
 
-
         Optional<User> userResult = userRepository.findById(Integer.valueOf(userId));
         User user = null;
         if (userResult.isPresent())
@@ -134,6 +137,18 @@ public class CustomerServiceImpl implements ICustomerService {
 
         FBUser fbUser = new FBUser(store, user);
         return fbUser;
+    }
+
+    private Appointment getAppointmentDetail(FBUser fbUser) {
+        Appointment appointment = new Appointment();
+        appointment.setUserId(fbUser.getId());
+        appointment.setStoreId(fbUser.getStoreId());
+        appointment.setDateCreated(LocalDateTime.now());
+        appointment.setStatus(AppointmentStatus.In_Queue);
+        appointment.setAppointmentNumber(99);
+        appointment.setId(0);
+        return appointment;
+
     }
 
 }

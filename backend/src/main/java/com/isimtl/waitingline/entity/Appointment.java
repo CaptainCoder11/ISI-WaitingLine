@@ -1,10 +1,7 @@
 package com.isimtl.waitingline.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,7 +12,8 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "appointment")
 @AllArgsConstructor
-public class Appoinment {
+@NoArgsConstructor
+public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +28,10 @@ public class Appoinment {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private AppoinmentStatus status;
+    private AppointmentStatus status;
 
     @Column(name = "appointment_number")
-    private int appoinmentNumber;
+    private int appointmentNumber;
 
     @Column(name = "time_of_arrival")
     private LocalDateTime timeOfArrival;
@@ -44,4 +42,11 @@ public class Appoinment {
     @Column(name = "date_created")
     private LocalDateTime dateCreated;
 
+    public Appointment(int id, int userId, int storeId, AppointmentStatus status) {
+        this.id = id;
+        this.userId = userId;
+        this.storeId = storeId;
+        this.status = status;
+        this.dateCreated = LocalDateTime.now();
+    }
 }

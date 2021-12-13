@@ -24,5 +24,4 @@ public class HomeController {
         projectDetails.put("version", version);
         return projectDetails;
     }
-
 }

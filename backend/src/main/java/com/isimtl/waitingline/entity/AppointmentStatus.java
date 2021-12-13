@@ -1,5 +1,5 @@
 package com.isimtl.waitingline.entity;
 
-public enum AppoinmentStatus {
+public enum AppointmentStatus {
     In_Queue,In_Store,Cancelled,Rejected,Departed
 }
