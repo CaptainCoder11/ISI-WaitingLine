@@ -50,12 +50,31 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         app:hintTextAppearance="@style/TextLabel"
+        android:backgroundTint="@color/white"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:hint="Enter Your Name"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content">
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        app:hintTextAppearance="@style/TextLabel"
         android:layout_margin="@dimen/_15sdp"
         android:layout_height="wrap_content">
 
     <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
+            android:backgroundTint="@color/white"
             android:hint="Enter Email here"
             android:textColor="@color/white"
             android:layout_height="wrap_content">
@@ -80,6 +99,7 @@
         android:id="@+id/et_phone"
         android:layout_width="match_parent"
         android:hint="Enter Phone Number"
+        android:backgroundTint="@color/white"
         android:textColor="@color/white"
         android:layout_height="wrap_content">
     </com.google.android.material.textfield.TextInputEditText>

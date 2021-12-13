@@ -74,6 +74,7 @@
             android:layout_height="@dimen/_20sdp"></ImageView>
         <EditText
             android:id="@+id/etsearch"
+            android:backgroundTint="@color/white"
             android:layout_marginTop="@dimen/_3sdp"
             android:hint="Search here"
             android:layout_gravity="center_vertical"

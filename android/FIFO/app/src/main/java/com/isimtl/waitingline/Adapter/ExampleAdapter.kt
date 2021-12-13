@@ -1,5 +1,7 @@
 package com.isimtl.waitingline.Adapter
 
+import android.content.Context
+import android.util.Base64
 import java.util.ArrayList
 import androidx.recyclerview.widget.RecyclerView
 import com.isimtl.waitingline.Adapter.ExampleAdapter.ExampleViewHolder
@@ -8,11 +10,16 @@ import android.view.View
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.isimtl.waitingline.Exensions.font
+import com.isimtl.waitingline.Extensions.backgroundscope
+import com.isimtl.waitingline.Extensions.mainscope
 import com.isimtl.waitingline.Models.Store
 import com.isimtl.waitingline.R
+import kotlinx.coroutines.launch
+import java.util.*
 
-class ExampleAdapter(private val mExampleList: ArrayList<Store>) : RecyclerView.Adapter<ExampleViewHolder>() {
+class ExampleAdapter(private val mcontext: Context, private val mExampleList: ArrayList<Store>) : RecyclerView.Adapter<ExampleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view, parent, false)
         return ExampleViewHolder(v)
@@ -20,7 +27,16 @@ class ExampleAdapter(private val mExampleList: ArrayList<Store>) : RecyclerView.
 
     override fun onBindViewHolder(holder: ExampleViewHolder, position: Int) {
         val currentItem = mExampleList[position]
-        holder.mImageView.setImageResource(R.mipmap.store)
+       backgroundscope.launch {
+           val image = Base64.decode(currentItem.logo, Base64.DEFAULT)
+            mainscope.launch {
+                Glide.with(mcontext).asBitmap()
+                    .load(image)
+                    .placeholder(R.mipmap.store)
+                    .into(holder.mImageView)
+            }
+       }
+        //holder.mImageView.setImageResource(R.mipmap.store)
         holder.mTextView1.text = currentItem.name
         holder.mTextView2.text = currentItem.openingHour
         holder.mTextView3.text = currentItem.closingHour

@@ -18,12 +18,11 @@
             android:name=".Activity.StoreDialog"
             android:exported="true" />
         <activity
+            android:name="com.isimtl.waitingline.Activity.DashboardActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
+        </activity>
 
-            android:name=".Activity.MainActivity2"
-            android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".Activity.StoreDetails"
-            android:exported="true" >
             android:name="com.isimtl.waitingline.Activity.Login"
             android:theme="@style/Theme.Design.NoActionBar">
         </activity>
