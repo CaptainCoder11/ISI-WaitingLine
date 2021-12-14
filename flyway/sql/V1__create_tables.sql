@@ -8,8 +8,7 @@ CREATE TABLE `user` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `phone` varchar(10) DEFAULT NULL,
-  `password_hash` binary(64) DEFAULT NULL,
-  `password_salt` binary(64) DEFAULT NULL,
+  `password` varchar(60) DEFAULT NULL,
   `date_added` datetime NOT NULL,
   `otp` varchar(10) DEFAULT NULL,
   `otp_expiry` datetime DEFAULT NULL,
@@ -18,7 +17,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `phone_UNIQUE` (`phone`)
 );
-INSERT INTO `user` VALUES (0,'Jack','Jack123@gmail.com','0001112222',NULL,NULL,'2021-11-29 00:00:00',NULL,NULL),(0,'Dwyane','Dwyane123@gmail.com','0111112222',_binary 'dummy\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',_binary 'dummy\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0','2021-11-29 00:00:00',NULL,NULL),(0,'Lily','Lily123@gmail.com','1111112222',_binary 'dummy\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',_binary 'dummy\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0','2021-11-29 00:00:00',NULL,NULL),(0,'Ted','Ted146@gmail.com','1112112222',NULL,NULL,'2021-11-29 00:00:00',NULL,NULL);
+INSERT INTO `user` VALUES (0,'Jack','Jack123@gmail.com','0001112222',NULL,'2021-11-29 00:00:00',NULL,NULL),(0,'Dwyane','Dwyane123@gmail.com','0111112222','$2a$10$cZlQtKG5E0dQ6h9xIJ1l1OhvBei3xQOjt7sWu5szOV8Kv4QjquVkm','2021-11-29 00:00:00',NULL,NULL),(0,'Lily','Lily123@gmail.com','1111112222','$2a$10$cZlQtKG5E0dQ6h9xIJ1l1OhvBei3xQOjt7sWu5szOV8Kv4QjquVkm','2021-11-29 00:00:00',NULL,NULL),(0,'Ted','Ted146@gmail.com','1112112222',NULL,'2021-11-29 00:00:00',NULL,NULL);
 
 
 CREATE TABLE `store` (
