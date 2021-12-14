@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.widget.doOnTextChanged
@@ -17,9 +19,7 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.result.Result
 import com.isimtl.waitingline.Adapter.ExampleAdapter
 import com.isimtl.waitingline.Api.BASE_URL
-import com.isimtl.waitingline.Exensions.font
-import com.isimtl.waitingline.Exensions.log
-import com.isimtl.waitingline.Exensions.openActivity
+import com.isimtl.waitingline.Exensions.*
 import com.isimtl.waitingline.Extensions.backgroundscope
 import com.isimtl.waitingline.Extensions.mainscope
 import com.isimtl.waitingline.Models.Otp
@@ -36,6 +36,9 @@ class StoreDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.store_details)
+
+        Prefs = PreferenceManager.getDefaultSharedPreferences(this)
+
         btlogin.font("DidactGothic-Regular.ttf")
         tvtitle.font("DancingScript.ttf")
         tv_stores.font("DidactGothic-Regular.ttf")
@@ -67,16 +70,31 @@ class StoreDetails : AppCompatActivity() {
             openActivity(Login::class.java)
         }
 
+        if(!Prefs?.getString("storeid","").isNullOrEmpty())
+        {
+            lystoredetails.show()
+            qrcode.hide()
+        }
+
         
         etsearch.doOnTextChanged { text, start, before, count ->
             text?.log()
            var list =  stores.filter {
-               it -> it.name.contains(text.toString())
+               it -> it.name.lowercase().contains(text.toString().lowercase())
             } as ArrayList
             initstores(list)
         }
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(Prefs!=null)
+        {
+            var login = Prefs?.getBoolean("islogin",false)
+            if(login!!)  btlogin.visibility = View.GONE
+        }
     }
 
     fun initstores(list:ArrayList<Store>){

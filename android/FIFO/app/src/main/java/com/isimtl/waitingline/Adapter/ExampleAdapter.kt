@@ -1,17 +1,18 @@
 package com.isimtl.waitingline.Adapter
 
+import android.app.Dialog
 import android.content.Context
 import android.util.Base64
+import android.view.*
 import java.util.ArrayList
 import androidx.recyclerview.widget.RecyclerView
 import com.isimtl.waitingline.Adapter.ExampleAdapter.ExampleViewHolder
-import android.view.ViewGroup
-import android.view.View
-import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.isimtl.waitingline.Exensions.Prefs
 import com.isimtl.waitingline.Exensions.font
+import com.isimtl.waitingline.Exensions.putAny
 import com.isimtl.waitingline.Extensions.backgroundscope
 import com.isimtl.waitingline.Extensions.mainscope
 import com.isimtl.waitingline.Models.Store
@@ -40,6 +41,21 @@ class ExampleAdapter(private val mcontext: Context, private val mExampleList: Ar
         holder.mTextView1.text = currentItem.name
         holder.mTextView2.text = currentItem.openingHour
         holder.mTextView3.text = currentItem.closingHour
+
+       holder.itemView.setOnClickListener {
+           var dialog = Dialog(mcontext, android.R.style.Theme_Dialog)
+           dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+           dialog.setContentView(R.layout.activity_store_dialog)
+           dialog.setCanceledOnTouchOutside(true)
+           dialog.setCanceledOnTouchOutside(false);
+           dialog.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+           dialog.show()
+
+           Prefs?.putAny("storeid", currentItem.id)
+
+
+       }
+
     }
 
     override fun getItemCount(): Int {

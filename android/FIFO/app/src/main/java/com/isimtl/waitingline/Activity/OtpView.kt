@@ -3,6 +3,7 @@ package com.isimtl.waitingline.Activity
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Context
+import android.preference.PreferenceManager
 import com.kyleduo.blurpopupwindow.library.BlurPopupWindow
 import android.view.ViewGroup
 import android.view.View
@@ -14,7 +15,9 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.result.Result
 import com.isimtl.waitingline.Api.BASE_URL
+import com.isimtl.waitingline.Exensions.Prefs
 import com.isimtl.waitingline.Exensions.log
+import com.isimtl.waitingline.Exensions.putAny
 import com.isimtl.waitingline.Exensions.toast
 import com.isimtl.waitingline.Extensions.backgroundscope
 import com.isimtl.waitingline.Extensions.mainscope
@@ -52,6 +55,8 @@ class OtpView(context: Context,uid:Int) : BlurPopupWindow(context) {
                         if (data?.id != null) {
                             "Correct!".log()
                             mainscope.launch { context.toast("Correct!") }
+                            Prefs?.putAny("islogin",true)
+                            Prefs?.putAny("userid",data.id)
                             (context as Activity).finish()
                         }
                     }

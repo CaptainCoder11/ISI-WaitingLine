@@ -3,6 +3,7 @@ package com.isimtl.waitingline.Activity
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
@@ -19,6 +20,7 @@ import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.fuel.json.responseJson
 import com.github.kittinunf.result.Result
 import com.isimtl.waitingline.Api.BASE_URL
+import com.isimtl.waitingline.Exensions.Prefs
 import com.isimtl.waitingline.Exensions.font
 import com.isimtl.waitingline.Exensions.log
 import com.isimtl.waitingline.Exensions.toast
@@ -37,6 +39,8 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
+
+        Prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         et_email.font("DidactGothic-Regular.ttf")
         tv_or.font("DancingScript.ttf")
