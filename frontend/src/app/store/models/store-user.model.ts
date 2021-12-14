@@ -4,4 +4,5 @@ export interface StoreUser {
   id?: number;
   fullName?: string;
   phone?: number;
+  storeId: number;
 }

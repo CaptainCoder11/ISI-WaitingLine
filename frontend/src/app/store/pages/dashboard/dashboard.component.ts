@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store } from 'src/app/common/models/store.model';
-import { StoreService } from 'src/app/common/services/store.service';
 import * as Highcharts from "highcharts";
+import { WaitingListFirebaseService } from 'src/app/common/services/waiting-list.firebase.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { CustomerWaiting } from 'src/app/common/models/customer-waiting.model';
+import { AuthenticationService } from 'src/app/common/services/authentication.service';
 
 @Component({
   selector: 'app-store-dashboard',
@@ -101,11 +102,32 @@ export class StoreDashboardComponent implements OnInit {
     }]
   };
 
-  store$: Observable<Store>;
-  constructor(private storeService: StoreService) {
-    this.store$ = this.storeService.getById(1);
+  masterWaitingLine: CustomerWaiting[];
+  waitingLine: CustomerWaiting[];
+  constructor(
+    private waitingListFirebaseService: WaitingListFirebaseService,
+    private authService: AuthenticationService,
+    private spinner: NgxSpinnerService,
+  ) {
+
+      this.waitingListFirebaseService.getStoreWaiting(this.authService.getStoreUser.storeId).subscribe((response) => {
+        this.masterWaitingLine = response;
+        this.waitingLine = response;
+      });
   }
 
   ngOnInit(): void {
+  }
+
+  onSearchInWaitingLine(event) {
+    const val: string = event.target.value;
+
+    if (!val) {
+      this.waitingLine = this.masterWaitingLine;
+    } else {
+      this.waitingLine = this.masterWaitingLine.filter((x) =>
+        x.name.toLowerCase().includes(val.toLocaleLowerCase())
+      );
+    }
   }
 }
