@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "user")
 @JsonIgnoreProperties(value = {"otp_expiry", "date_added"})
-public class User {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +56,9 @@ public class User {
         return getName() + "/" + getEmail() + "/" + getPhone() + "/" + getOtp();
     }
 
+    @OneToOne
+    @JoinColumn(name="id")
+    private StoreUser storeUser;
 
     @Override
     public String toString() {
@@ -68,6 +71,7 @@ public class User {
                 ", otp='" + otp + '\'' +
                 ", otpExpiry=" + otpExpiry +
                 ", dateAdded=" + dateAdded +
+                ", storeUser=" + storeUser +
                 '}';
     }
 

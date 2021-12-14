@@ -28,17 +28,11 @@ import java.util.Objects;
 @EntityScan(basePackages = {"com.isimtl.waitingline.entity"})
 
 public class WaitinglineApplication {
+
+    private static Class applicationClass = WaitinglineApplication.class;
+
+
     public static void main(String[] args) throws Exception {
-//        Resource resource = new ClassPathResource("serviceAccountKey.json");
-//        InputStream inputStream = resource.getInputStream();
-//
-//        FirebaseOptions options = new FirebaseOptions.Builder()
-//                .setCredentials(GoogleCredentials.fromStream(inputStream))
-//                .build();
-//
-//        FirebaseApp.initializeApp(options);
-
-
         SpringApplication.run(WaitinglineApplication.class, args);
     }
 
