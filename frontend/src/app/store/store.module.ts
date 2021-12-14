@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreFooterComponent } from './components/footer/footer.component';
 import { StoreHeaderComponent } from './components/header/header.component';
-import { StoreInfoComponent } from './components/store-info/store-info.component';
 import { StoreDashboardComponent } from './pages/dashboard/dashboard.component';
 import { StoreLoginComponent } from './pages/login/login.component';
 import { StoreRoutingModule } from './store-routing.module';
@@ -14,15 +13,13 @@ import { StoreService } from '../common/services/store.service';
 import { StoreEmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { StoreEmployeeListComponent } from './components/employee-list/employee-list.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { WaitingComponent } from './pages/waiting/waiting.component';
 
-const DashboardComponents = [StoreDashboardComponent, StoreInfoComponent];
+const DashboardComponents = [StoreDashboardComponent];
 
 const EmployeeComponents = [
   StoreEmployeeComponent,
   StoreEmployeeListComponent,
   StoreEmployeeFormComponent,
-  WaitingComponent,
 ];
 
 @NgModule({

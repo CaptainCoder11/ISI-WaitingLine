@@ -7,28 +7,27 @@ import { NotyUtil } from 'src/app/common/utils/noty-util';
 @Component({
   selector: 'app-customer-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class CustomerHeaderComponent implements OnInit {
-
-  constructor(public authService: AuthenticationService,
+  constructor(
+    public authService: AuthenticationService,
     private router: Router
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   get isLoggedIn() {
-    return this.authService.isAuthenticated();
+    return this.authService.isCustomerAuthenticated();
   }
 
   get user(): User {
-    return this.authService.getUser;
+    return this.authService.getCustomer;
   }
 
   onLogout() {
-    this.authService.logout();
-    NotyUtil.success("You are logged out!!!");
+    this.authService.customerLogout();
+    NotyUtil.success('You are logged out!!!');
     this.router.navigate(['/']);
   }
 }

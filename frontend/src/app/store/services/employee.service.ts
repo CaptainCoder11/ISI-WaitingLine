@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { Employee } from 'src/app/store/models/employee.model';
+import { StoreUser } from 'src/app/store/models/store-user.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,11 +12,13 @@ export class EmployeeService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Observable<Array<Employee>> {
-    return this.httpClient.get<Array<Employee>>(this._url);
+  getAll(): Observable<Array<StoreUser>> {
+    return this.httpClient.get<Array<StoreUser>>(this._url);
   }
 
-  getById(id: number): Observable<Employee> {
-    return this.httpClient.get<Employee>(this._url).pipe(map((x: any) => x[0]));
+  getById(id: number): Observable<StoreUser> {
+    return this.httpClient
+      .get<StoreUser>(this._url)
+      .pipe(map((x: any) => x[0]));
   }
 }

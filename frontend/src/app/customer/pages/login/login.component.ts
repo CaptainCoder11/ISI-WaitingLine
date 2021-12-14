@@ -1,10 +1,6 @@
 import { PlatformLocation } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from 'src/app/common/models/user.model';
@@ -28,17 +24,17 @@ export class CustomerLoginComponent implements OnInit {
     private router: Router,
     private authService: AuthenticationService,
     private spinner: NgxSpinnerService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.user = {
-        id: params["id"],
-        name: params["name"],
-        email: params["email"],
-        phone: params["phone"],
-        otp: params["otp"],
-      }
+        id: params['id'],
+        name: params['name'],
+        email: params['email'],
+        phone: params['phone'],
+        otp: params['otp'],
+      };
       if (this.user.email && this.user.phone && this.user.otp) {
         this.showOtp = true;
       }
@@ -50,14 +46,16 @@ export class CustomerLoginComponent implements OnInit {
     this.form = new FormGroup({
       id: new FormControl(this.user.id),
       name: new FormControl(this.user.name, Validators.required),
-      email: new FormControl(this.user.email, [Validators.required, Validators.email]),
+      email: new FormControl(this.user.email, [
+        Validators.required,
+        Validators.email,
+      ]),
       phone: new FormControl(this.user.phone),
       otp: new FormControl(this.user.otp),
-      showOtp: new FormControl(this.showOtp)
+      showOtp: new FormControl(this.showOtp),
     });
 
-    if (this.showOtp)
-      this.form.get('otp').setValidators(Validators.required);
+    if (this.showOtp) this.form.get('otp').setValidators(Validators.required);
 
     this.form.get('showOtp').valueChanges.subscribe((value) => {
       if (value) {
@@ -76,34 +74,42 @@ export class CustomerLoginComponent implements OnInit {
 
     if (!this.isOtp) {
       this.spinner.show();
-      this.authService.login(this.form.value).subscribe((user: User) => {
-        this.spinner.hide();
-        NotyUtil.success("Email has been sent for OTP");
-        this.form.get('id').setValue(user.id);
-        this.submitted = false;
-        this.form.get('showOtp').setValue(true);
-      }, (e) => {
-        this.spinner.hide();
-        const error = e.error.message || e.error.error;
-        NotyUtil.error(error);
-      }, () => {
-        this.spinner.hide();
-      });
+      this.authService.customerLogin(this.form.value).subscribe(
+        (user: User) => {
+          this.spinner.hide();
+          NotyUtil.success('Email has been sent for OTP');
+          this.form.get('id').setValue(user.id);
+          this.submitted = false;
+          this.form.get('showOtp').setValue(true);
+        },
+        (e) => {
+          this.spinner.hide();
+          const error = e.error.message || e.error.error;
+          NotyUtil.error(error);
+        },
+        () => {
+          this.spinner.hide();
+        }
+      );
     } else {
       this.spinner.show();
-      this.authService.verifyOtp(this.form.value).subscribe(() => {
-        this.spinner.hide();
-        NotyUtil.success("OTP verification complete");
-        this.submitted = false;
-        this.form.get('showOtp').setValue(false);
-        this.router.navigate(['/']);
-      }, (e) => {
-        this.spinner.hide();
-        const error = e.error.message || e.error.error;
-        NotyUtil.error(error);
-      }, () => {
-        this.spinner.hide();
-      });
+      this.authService.verifyOtp(this.form.value).subscribe(
+        () => {
+          this.spinner.hide();
+          NotyUtil.success('OTP verification complete');
+          this.submitted = false;
+          this.form.get('showOtp').setValue(false);
+          this.router.navigate(['/']);
+        },
+        (e) => {
+          this.spinner.hide();
+          const error = e.error.message || e.error.error;
+          NotyUtil.error(error);
+        },
+        () => {
+          this.spinner.hide();
+        }
+      );
     }
   }
 
@@ -112,6 +118,6 @@ export class CustomerLoginComponent implements OnInit {
   }
 
   get isOtp() {
-    return this.getControl('showOtp').value
+    return this.getControl('showOtp').value;
   }
 }

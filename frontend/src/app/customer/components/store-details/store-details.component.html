@@ -1,26 +1,39 @@
 <kendo-dialog-titlebar (close)="closeForm()">
-    Store details
+  Store details
 </kendo-dialog-titlebar>
 <div class="card" *ngIf="store">
-    <div class="card-body">
-        <img class="card-img-top" [src]="DISPLAY_LOGO(store.logo)" data-holder-rendered="true">
-        <div class="mt-2">
-            <h5 class="card-title text-center">{{store.name}}</h5>
-            <p>
-                {{store.address}}
-            </p>
-            <div class="d-flex justify-content-between">
-                <span class="badge badge-success">Open: {{store.openingHour}}</span>
-                <span class="badge badge-danger"> Close: {{store.closingHour}}</span>
-            </div>
-        </div>
+  <div class="card-body">
+    <img
+      class="card-img-top"
+      [src]="DISPLAY_LOGO(store.logo)"
+      data-holder-rendered="true"
+    />
+    <div class="mt-2">
+      <h5 class="card-title text-center">{{ store.name }}</h5>
+      <p>
+        {{ store.address }}
+      </p>
+      <div class="d-flex justify-content-between">
+        <span class="badge badge-success">Open: {{ store.openingHour }}</span>
+        <span class="badge badge-danger"> Close: {{ store.closingHour }}</span>
+      </div>
     </div>
-    <div class="card-footer">
-        <div class="d-flex justify-content-center">
-            <a routerLink="/login" class="btn button-green m-3" *ngIf="!this.authService.isAuthenticated()">Login to
-                Join Waiting List</a>
-            <a type="button" class="btn button-blue m-3" (click)="joinWaitingLine(store.id)"
-                *ngIf="this.authService.isAuthenticated() && !customerWaiting">Join Waiting List</a>
-        </div>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-center">
+      <a
+        routerLink="/login"
+        class="btn button-green m-3"
+        *ngIf="!this.authService.isCustomerAuthenticated()"
+        >Login to Join Waiting List</a
+      >
+      <a
+        type="button"
+        class="btn button-blue m-3"
+        (click)="joinWaitingLine(store.id)"
+        *ngIf="this.authService.isCustomerAuthenticated() && !customerWaiting"
+        >Join Waiting List</a
+      >
     </div>
+  </div>
 </div>

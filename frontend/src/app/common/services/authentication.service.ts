@@ -1,14 +1,13 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { flatMap, map, Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { Router } from '@angular/router';
+import { map, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
-import { Employee } from 'src/app/store/models/employee.model';
+import { StoreUser } from 'src/app/store/models/store-user.model';
 
 const LOCALSTORAGE = {
-  USER: 'user',
-  EMPLOYEE: 'employee',
+  CUSTOMER: 'customer',
+  STORE: 'store',
 };
 
 @Injectable({
@@ -18,42 +17,47 @@ export class AuthenticationService implements OnDestroy {
   /* constants and variable declarations */
   private readonly apiUrl = environment.api_url;
 
-  // public ON_LOGIN: Subject<[User, Employee]> = new ReplaySubject<
-  //   [User, Employee]
-  // >(1);
-  public ON_LOGIN: Subject<User> = new ReplaySubject<User>(1);
+  public ON_LOGIN: Subject<User> = new ReplaySubject<any>(1);
   public ON_LOGOUT: Subject<void> = new Subject<void>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   ngOnDestroy(): void {
     this.ON_LOGIN.complete();
     this.ON_LOGOUT.complete();
   }
 
-  public get getUser(): User {
-    return JSON.parse(localStorage.getItem(LOCALSTORAGE.USER));
+  public get getCustomer(): User {
+    return JSON.parse(localStorage.getItem(LOCALSTORAGE.CUSTOMER));
   }
 
   private handleAuth(user: any) {
     this.ON_LOGIN.next(user);
   }
 
-  public isAuthenticated(): boolean {
-    return !!this.getUser;
+  public isCustomerAuthenticated(): boolean {
+    return !!this.getCustomer;
   }
 
-  public whoAmI(user: User): User {
-    if (this.getUser) {
-      return this.getUser;
+  public whoAmI(user: any): any {
+    if (this.getCustomer) {
+      return this.getCustomer;
+    }
+
+    if (this.getStoreUser) {
+      return this.getStoreUser;
     }
 
     this.handleAuth(user);
   }
 
-  public login(user: User): Observable<any> {
+  public customerLogin(user: User): Observable<any> {
     const url = `${this.apiUrl}/customer/login`;
-    return this.http.post<User>(url, user);
+    return this.http.post<User>(url, user).pipe(
+      map((user) => {
+        this.storeLogout();
+      })
+    );
   }
 
   public verifyOtp(user: User): Observable<any> {
@@ -61,27 +65,37 @@ export class AuthenticationService implements OnDestroy {
 
     return this.http.post<User>(url, user).pipe(
       map((user) => {
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem(LOCALSTORAGE.CUSTOMER, JSON.stringify(user));
         return of(this.whoAmI(user));
       })
     );
   }
 
-  public logout() {
-    return localStorage.removeItem(LOCALSTORAGE.USER);
+  public customerLogout() {
+    return localStorage.removeItem(LOCALSTORAGE.CUSTOMER);
   }
 
-  public loginEmp(employee: Employee): Observable<any> {
-    const url = `${this.apiUrl}/store/login`;
-    return this.http.post<Employee>(url, employee);
+  public storeLogin(user: StoreUser): Observable<any> {
+    const url = `${this.apiUrl}/employee/login?email=${user.email}&password=${user.password}`;
+
+    return this.http.post<User>(url, user).pipe(
+      map((user) => {
+        this.customerLogout();
+        localStorage.setItem(LOCALSTORAGE.STORE, JSON.stringify(user));
+        return of(this.whoAmI(user));
+      })
+    );
   }
-  public logoutEmp() {
-    return localStorage.removeItem(LOCALSTORAGE.USER);
+
+  public storeLogout() {
+    return localStorage.removeItem(LOCALSTORAGE.STORE);
   }
-  public get getEmployee(): Employee {
-    return JSON.parse(localStorage.getItem(LOCALSTORAGE.EMPLOYEE));
+
+  public get getStoreUser(): StoreUser {
+    return JSON.parse(localStorage.getItem(LOCALSTORAGE.STORE));
   }
-  public isAuthenticatedEmp(): boolean {
-    return !!this.getEmployee;
+
+  public isStoreUserAuthenticated(): boolean {
+    return !!this.getStoreUser;
   }
 }

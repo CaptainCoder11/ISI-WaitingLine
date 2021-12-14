@@ -13,7 +13,7 @@ import { CustomerStoreDetailsComponent } from '../../components/store-details/st
 @Component({
   selector: 'app-customer-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class CustomerHomeComponent implements OnInit {
   DISPLAY_LOGO = DISPLAY_LOGO;
@@ -23,23 +23,29 @@ export class CustomerHomeComponent implements OnInit {
   customerWaiting: CustomerWaiting;
   searchStore: string;
 
-  constructor(private storeService: StoreService,
+  constructor(
+    private storeService: StoreService,
     private waitingListFirebaseService: WaitingListFirebaseService,
     private spinner: NgxSpinnerService,
     public authService: AuthenticationService,
-    private dialogService: DialogService) {
-  }
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit(): void {
     this.spinner.show();
-    this.storeService.getAll().subscribe((stores) => {
-      this.spinner.hide();
-      this.masterStoreList = stores;
-      this.stores = stores;
-    }, (error) => this.spinner.hide());
+    this.storeService.getAll().subscribe(
+      (stores) => {
+        this.spinner.hide();
+        this.masterStoreList = stores;
+        this.stores = stores;
+      },
+      (error) => this.spinner.hide()
+    );
 
-    this.waitingListFirebaseService.get().subscribe(waitingList => {
-      this.customerWaiting = waitingList.find(x => x.id == this.authService.getUser?.id);
+    this.waitingListFirebaseService.get().subscribe((waitingList) => {
+      this.customerWaiting = waitingList.find(
+        (x) => x.id == this.authService.getCustomer?.id
+      );
     });
   }
 
@@ -61,22 +67,28 @@ export class CustomerHomeComponent implements OnInit {
     if (!val) {
       this.stores = this.masterStoreList;
     } else {
-      this.stores = this.masterStoreList.filter(x => x.name.toLowerCase().includes(val.toLocaleLowerCase()));
+      this.stores = this.masterStoreList.filter((x) =>
+        x.name.toLowerCase().includes(val.toLocaleLowerCase())
+      );
     }
   }
 
   removeFromWaitingLine(storeId) {
-    const userId = this.authService.getUser.id;
+    const userId = this.authService.getCustomer.id;
     this.spinner.show();
-    this.storeService.removeWaitingLine(userId, storeId).subscribe(() => {
-      this.spinner.hide();
-      NotyUtil.success("You have been removed from waiting line!");
-    }, (e) => {
-      this.spinner.hide();
-      const error = e.error.message || e.error.error;
-      NotyUtil.error(error);
-    }, () => {
-      this.spinner.hide();
-    });
+    this.storeService.removeWaitingLine(userId, storeId).subscribe(
+      () => {
+        this.spinner.hide();
+        NotyUtil.success('You have been removed from waiting line!');
+      },
+      (e) => {
+        this.spinner.hide();
+        const error = e.error.message || e.error.error;
+        NotyUtil.error(error);
+      },
+      () => {
+        this.spinner.hide();
+      }
+    );
   }
 }

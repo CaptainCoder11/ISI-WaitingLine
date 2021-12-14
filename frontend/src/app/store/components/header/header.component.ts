@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/common/services/authentication.service';
+import { DISPLAY_LOGO } from 'src/app/common/utils/functions';
 import { NotyUtil } from 'src/app/common/utils/noty-util';
-import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-store-header',
@@ -9,20 +10,25 @@ import { Employee } from '../../models/employee.model';
   styleUrls: ['./header.component.css'],
 })
 export class StoreHeaderComponent implements OnInit {
-  constructor(public authService: AuthenticationService) {}
+  DISPLAY_LOGO = DISPLAY_LOGO;
+  constructor(
+    public authService: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   get isLoggedIn() {
-    return this.authService.isAuthenticatedEmp();
+    return this.authService.isStoreUserAuthenticated();
   }
 
-  get employee(): Employee {
-    return this.authService.getEmployee;
+  get storeUser(): any {
+    return this.authService.getStoreUser;
   }
 
   onLogout() {
-    this.authService.logoutEmp();
+    this.authService.storeLogout();
     NotyUtil.success('You are logged out!!!');
+    this.router.navigate(['store', 'login']);
   }
 }

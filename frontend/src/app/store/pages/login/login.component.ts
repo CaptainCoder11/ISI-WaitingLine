@@ -1,19 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
-  Validator,
-  Validators,
-  AbstractControl,
-  ValidationErrors,
-} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { User } from 'src/app/common/models/user.model';
 import { AuthenticationService } from 'src/app/common/services/authentication.service';
 import { NotyUtil } from 'src/app/common/utils/noty-util';
-import { Employee } from '../../models/employee.model';
+import { StoreUser } from '../../models/store-user.model';
 
 @Component({
   selector: 'app-store-login',
@@ -23,12 +14,12 @@ import { Employee } from '../../models/employee.model';
 export class StoreLoginComponent implements OnInit {
   form: FormGroup;
   submitted: boolean;
+  employee: StoreUser;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private authService: AuthenticationService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,14 +36,14 @@ export class StoreLoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.form.invalid) return;
+
     this.spinner.show();
-    console.warn(this.form.value);
-    this.authService.loginEmp(this.form.value).subscribe(
-      (employee: Employee) => {
+    this.authService.storeLogin(this.form.value).subscribe(
+      (employee: StoreUser) => {
         this.spinner.hide();
         NotyUtil.success('Successfully login');
-        this.form.get('id').setValue(employee.id);
         this.submitted = false;
+        this.router.navigate(['store', 'dashboard']);
       },
       (e) => {
         this.spinner.hide();
