@@ -16,8 +16,11 @@
       [routerLink]="['/store', 'dashboard']"
     >
       <ng-container *ngIf="isLoggedIn">
-        <img class="card-img-top" [src]="DISPLAY_LOGO(storeUser.logo)" />
-        <h1 class="ml-2">{{ storeUser.storeName }}</h1>
+        <img
+          class="card-img-top logo p-1 rounded"
+          [src]="DISPLAY_LOGO(storeUser.logo)"
+        />
+        <h4 class="py-2 my-1">{{ storeUser.storeName }}</h4>
       </ng-container>
       <h1 *ngIf="!isLoggedIn">FIFO</h1>
     </a>
@@ -54,6 +57,9 @@
             ngbDropdownMenu
             aria-labelledby="navbarScrollingDropdown"
           >
+            <li ngbDropdownItem>
+              <a class="dropdown-item">Store Info </a>
+            </li>
             <li ngbDropdownItem>
               <a class="dropdown-item" (click)="onLogout()"> logout </a>
             </li>

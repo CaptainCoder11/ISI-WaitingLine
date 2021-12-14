@@ -1,8 +1,19 @@
 img {
-  height: 70x;
-  width: 70px;
+  height: 70px;
+  width: 85px;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 a {
   cursor: pointer;
+}
+.logo {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  text-indent: -9999px;
+}
+img:hover {
+  width: 120px;
 }
