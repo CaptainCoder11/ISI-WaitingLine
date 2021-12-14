@@ -25,15 +25,4 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeDTO);
     }
 
-    @RequestMapping(value = "/user-arrival", method = RequestMethod.POST)
-    public void userArrival() {
-
-    }
-
-    @RequestMapping(value = "/user-departure", method = RequestMethod.POST)
-    public void userDeparture() {
-
-    }
-
-
 }

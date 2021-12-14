@@ -114,13 +114,18 @@ public class CustomerServiceImpl implements ICustomerService {
     public void removeWaitingLine(int userId, int storeId) throws ExecutionException, InterruptedException {
         try {
             FBUser fbUser = getFbUser(userId, storeId);
+            Appointment appointment = appointmentService.findByIds(userId,storeId);
+            System.out.println(appointment);
+            appointment.setStatus(AppointmentStatus.Cancelled);
+            appointmentService.save(appointment);
             fbUserService.delete(fbUser);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private FBUser getFbUser(int userId, int storeId) {
+    @Override
+    public FBUser getFbUser(int userId, int storeId) {
         Optional<Store> storeResult = storeRepository.findById(Integer.valueOf(storeId));
         Store store = null;
         if (storeResult.isPresent())

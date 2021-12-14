@@ -35,7 +35,7 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "password")
     private String password;
 
@@ -55,7 +55,6 @@ public class User {
     public String getVerificationData() {
         return getName() + "/" + getEmail() + "/" + getPhone() + "/" + getOtp();
     }
-
 
     @Override
     public String toString() {
