@@ -1,20 +1,31 @@
 <div class="row mt-3">
-  <div class="col-md-3 col-xs-12" *ngFor="let employee of (employees$|async)">
+  <div class="col-md-3 col-xs-12">
+    <h6>Here show the list of all employees , waiting for API</h6>
     <div class="card mb-3 box-shadow">
-      <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-        alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
+      <img
+        class="card-img-top"
+        data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+        alt="Thumbnail [100%x225]"
+        style="height: 225px; width: 100%; display: block"
         src="https://thumbs.dreamstime.com/b/black-solid-icon-employee-applicant-man-logo-symbol-146530494.jpg"
-        data-holder-rendered="true">
-      <div class="card-body">
-        <p class="card-text">
-          <label class="text-center d-block">{{employee.fullName}}</label>
-        </p>
-      </div>
-      <div class="card-footer text-muted">
-        <div class="d-flex justify-content-between">
-          <span class="text-capitalize font-weight-normal">{{employee.email}}
-          </span>
-          <span class="text-capitalize font-weight-normal">{{employee.phone}}</span>
+        data-holder-rendered="true"
+      />
+      <!-- i'm using this div for temporary data after api remove it -->
+      <div class="" *ngFor="let employee of employees$ | async">
+        <div class="card-body">
+          <p class="card-text">
+            <label class="text-center d-block">{{ employee.fullName }}</label>
+          </p>
+        </div>
+        <div class="card-footer text-muted">
+          <div class="d-flex justify-content-between">
+            <span class="text-capitalize font-weight-normal"
+              >{{ employee.email }}
+            </span>
+            <span class="text-capitalize font-weight-normal">{{
+              employee.phone
+            }}</span>
+          </div>
         </div>
       </div>
     </div>

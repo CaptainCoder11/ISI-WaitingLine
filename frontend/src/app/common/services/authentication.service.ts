@@ -4,25 +4,27 @@ import { flatMap, map, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
+import { Employee } from 'src/app/store/models/employee.model';
 
 const LOCALSTORAGE = {
-  USER: 'user'
-}
+  USER: 'user',
+  EMPLOYEE: 'employee',
+};
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService implements OnDestroy {
-
   /* constants and variable declarations */
   private readonly apiUrl = environment.api_url;
 
+  // public ON_LOGIN: Subject<[User, Employee]> = new ReplaySubject<
+  //   [User, Employee]
+  // >(1);
   public ON_LOGIN: Subject<User> = new ReplaySubject<User>(1);
   public ON_LOGOUT: Subject<void> = new Subject<void>();
 
-
-  constructor(private http: HttpClient, private router: Router) {
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnDestroy(): void {
     this.ON_LOGIN.complete();
@@ -31,7 +33,7 @@ export class AuthenticationService implements OnDestroy {
 
   public get getUser(): User {
     return JSON.parse(localStorage.getItem(LOCALSTORAGE.USER));
-  };
+  }
 
   private handleAuth(user: any) {
     this.ON_LOGIN.next(user);
@@ -61,11 +63,25 @@ export class AuthenticationService implements OnDestroy {
       map((user) => {
         localStorage.setItem('user', JSON.stringify(user));
         return of(this.whoAmI(user));
-      }),
+      })
     );
   }
 
   public logout() {
     return localStorage.removeItem(LOCALSTORAGE.USER);
+  }
+
+  public loginEmp(employee: Employee): Observable<any> {
+    const url = `${this.apiUrl}/store/login`;
+    return this.http.post<Employee>(url, employee);
+  }
+  public logoutEmp() {
+    return localStorage.removeItem(LOCALSTORAGE.USER);
+  }
+  public get getEmployee(): Employee {
+    return JSON.parse(localStorage.getItem(LOCALSTORAGE.EMPLOYEE));
+  }
+  public isAuthenticatedEmp(): boolean {
+    return !!this.getEmployee;
   }
 }

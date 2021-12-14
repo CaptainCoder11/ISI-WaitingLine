@@ -14,17 +14,16 @@ import { StoreService } from '../common/services/store.service';
 import { StoreEmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { StoreEmployeeListComponent } from './components/employee-list/employee-list.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { WaitingComponent } from './pages/waiting/waiting.component';
 
-const DashboardComponents = [
-  StoreDashboardComponent,
-  StoreInfoComponent,
-];
+const DashboardComponents = [StoreDashboardComponent, StoreInfoComponent];
 
 const EmployeeComponents = [
   StoreEmployeeComponent,
   StoreEmployeeListComponent,
-  StoreEmployeeFormComponent
-]
+  StoreEmployeeFormComponent,
+  WaitingComponent,
+];
 
 @NgModule({
   declarations: [
@@ -33,17 +32,14 @@ const EmployeeComponents = [
     StoreHeaderComponent,
     StoreFooterComponent,
     DashboardComponents,
-    EmployeeComponents
+    EmployeeComponents,
   ],
   imports: [
     ReactiveFormsModule,
     StoreRoutingModule,
     HighchartsChartModule,
-    CommonModule
+    CommonModule,
   ],
-  providers: [
-    StoreService,
-    EmployeeService,
-  ],
+  providers: [StoreService, EmployeeService],
 })
-export class StoreModule { }
+export class StoreModule {}
