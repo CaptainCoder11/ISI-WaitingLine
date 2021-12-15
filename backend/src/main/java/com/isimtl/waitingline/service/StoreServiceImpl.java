@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -63,6 +64,7 @@ public class StoreServiceImpl implements IStoreService {
             FBUser fbUser = customerService.getFbUser(userId, storeId);
             Appointment appointment = appointmentService.findByIds(userId,storeId,AppointmentStatus.In_Queue);
             appointment.setStatus(AppointmentStatus.In_Store);
+            appointment.setTimeOfArrival(LocalDateTime.now());
             appointmentService.save(appointment);
             fbUserService.delete(fbUser);
         } catch (Exception e) {
@@ -78,6 +80,7 @@ public class StoreServiceImpl implements IStoreService {
             FBUser fbUser = customerService.getFbUser(userId, storeId);
             Appointment appointment = appointmentService.findByIds(userId,storeId,AppointmentStatus.In_Store);
             appointment.setStatus(AppointmentStatus.Departed);
+            appointment.setTimeOfDeparture(LocalDateTime.now());
             appointmentService.save(appointment);
             fbUserService.delete(fbUser);
         } catch (Exception e) {
@@ -97,5 +100,11 @@ public class StoreServiceImpl implements IStoreService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<Appointment> InStoreUsers(int storeId) throws ExecutionException, InterruptedException {
+        List<Appointment> appointments = this.appointmentService.inStoreUsers(storeId);
+        return appointments;
     }
 }

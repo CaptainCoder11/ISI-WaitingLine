@@ -6,6 +6,7 @@ import com.isimtl.waitingline.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,6 +32,17 @@ public class AppointmentServiceImpl implements IAppointmentService {
         else
             throw new RuntimeException("User not found with id - " + userId);
         return (appointment);
+    }
 
+    @Override
+    public List<Appointment> inStoreUsers(int storeId) {
+        Optional<List<Appointment>> result = appointmentRepository.inStoreUsers(Integer.valueOf(storeId),AppointmentStatus.In_Store);
+        List<Appointment> appointment = null;
+        if (result.isPresent()) {
+            appointment = result.get();
+            System.out.println(appointment);
+        }else
+            throw new RuntimeException("Store not found ");
+        return (appointment);
     }
 }

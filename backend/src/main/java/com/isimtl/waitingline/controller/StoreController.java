@@ -1,5 +1,6 @@
 package com.isimtl.waitingline.controller;
 
+import com.isimtl.waitingline.entity.Appointment;
 import com.isimtl.waitingline.entity.Store;
 import com.isimtl.waitingline.service.IStoreService;
 import lombok.extern.slf4j.Slf4j;
@@ -67,5 +68,16 @@ public class StoreController {
             throw new RuntimeException(e);
         }
         return ResponseEntity.ok(true);
+    }
+
+    @GetMapping(value = "/in-store-user-list/{storeId}")
+    public ResponseEntity<List<Appointment>> usersList(@PathVariable("storeId") int storeId) {
+        try {
+            return ResponseEntity.ok(storeService.InStoreUsers(storeId));
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

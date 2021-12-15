@@ -145,8 +145,13 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     private Appointment getAppointmentDetail(FBUser fbUser) {
+        User user = new User();
+        user.setId(fbUser.getId());
+        user.setName(fbUser.getName());
+        user.setEmail(fbUser.getEmail());
+
         Appointment appointment = new Appointment();
-        appointment.setUserId(fbUser.getId());
+        appointment.setUser(user);
         appointment.setStoreId(fbUser.getStoreId());
         appointment.setDateCreated(LocalDateTime.now());
         appointment.setStatus(AppointmentStatus.In_Queue);

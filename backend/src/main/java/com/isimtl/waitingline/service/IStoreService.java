@@ -1,5 +1,6 @@
 package com.isimtl.waitingline.service;
 
+import com.isimtl.waitingline.entity.Appointment;
 import com.isimtl.waitingline.entity.Store;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface IStoreService {
     public void arrival(int userId, int storeId) throws ExecutionException, InterruptedException;
     public void departure(int userId, int storeId) throws ExecutionException, InterruptedException;
     public void remove(int userId, int storeId) throws ExecutionException, InterruptedException;
+    public List<Appointment> InStoreUsers(int storeId) throws ExecutionException, InterruptedException;
+
 }

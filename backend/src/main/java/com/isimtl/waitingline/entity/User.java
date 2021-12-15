@@ -63,7 +63,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", passwordSalt='" + password + '\'' +
+                ", password='" + password + '\'' +
                 ", otp='" + otp + '\'' +
                 ", otpExpiry=" + otpExpiry +
                 ", dateAdded=" + dateAdded +
