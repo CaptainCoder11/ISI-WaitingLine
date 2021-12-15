@@ -87,6 +87,7 @@ class OtpView(context: Context,uid:Int) : BlurPopupWindow(context) {
     }
 
     override fun createDismissAnimator(): ObjectAnimator {
+
         val height = contentView.measuredHeight
         return ObjectAnimator.ofFloat(contentView, "translationY", 0f, height.toFloat())
             .setDuration(
@@ -96,11 +97,13 @@ class OtpView(context: Context,uid:Int) : BlurPopupWindow(context) {
 
     class Builder(context: Context?,id:Int) : BlurPopupWindow.Builder<OtpView>(context) {
         private var id = id
+
         override fun createPopupWindow(): OtpView {
             return OtpView(mContext, id)
         }
 
         init {
+            this.setDismissOnTouchBackground(false)
             setScaleRatio(0.25f).setBlurRadius(8f).setTintColor(0x30000000)
         }
     }
