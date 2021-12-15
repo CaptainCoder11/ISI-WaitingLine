@@ -56,6 +56,7 @@ export class AuthenticationService implements OnDestroy {
     return this.http.post<User>(url, user).pipe(
       map((user) => {
         this.storeLogout();
+        return user;
       })
     );
   }

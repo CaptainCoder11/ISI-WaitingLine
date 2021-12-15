@@ -4,6 +4,8 @@ import { WaitingListFirebaseService } from 'src/app/common/services/waiting-list
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomerWaiting } from 'src/app/common/models/customer-waiting.model';
 import { AuthenticationService } from 'src/app/common/services/authentication.service';
+import { StoreService } from 'src/app/common/services/store.service';
+import { NotyUtil } from 'src/app/common/utils/noty-util';
 
 @Component({
   selector: 'app-store-dashboard',
@@ -104,19 +106,31 @@ export class StoreDashboardComponent implements OnInit {
 
   masterWaitingLine: CustomerWaiting[];
   waitingLine: CustomerWaiting[];
+  stats: any = {
+    waitingListCount: 0,
+    insideStoreCount: 0,
+    employeesCount: 0
+  };
+
   constructor(
     private waitingListFirebaseService: WaitingListFirebaseService,
     private authService: AuthenticationService,
+    private storeService: StoreService,
     private spinner: NgxSpinnerService,
   ) {
+    this.getStoreWaitingList();
 
-      this.waitingListFirebaseService.getStoreWaiting(this.authService.getStoreUser.storeId).subscribe((response) => {
-        this.masterWaitingLine = response;
-        this.waitingLine = response;
-      });
   }
 
   ngOnInit(): void {
+  }
+
+  getStoreWaitingList() {
+    this.waitingListFirebaseService.getStoreWaitingList(this.authService.getStoreUser.storeId).subscribe((response) => {
+      this.masterWaitingLine = response;
+      this.waitingLine = response;
+      this.stats.waitingListCount = response.length;
+    });
   }
 
   onSearchInWaitingLine(event) {
@@ -129,5 +143,39 @@ export class StoreDashboardComponent implements OnInit {
         x.name.toLowerCase().includes(val.toLocaleLowerCase())
       );
     }
+  }
+
+  customerArrivalInStore(userId) {
+    this.spinner.show();
+    this.storeService.customerArrival(userId, this.authService.getStoreUser.storeId).subscribe(
+      (response) => {
+        this.spinner.hide();
+        NotyUtil.success("Customer moved into store");
+        this.getStoreWaitingList();
+      },
+      (e) => {
+        this.spinner.hide();
+        const error = e.error.message || e.error.error;
+        NotyUtil.error(error);
+      },
+      () => this.spinner.hide()
+    );
+  }
+
+  customerDepartureFromStore(userId) {
+    this.spinner.show();
+    this.storeService.customerDeparture(userId, this.authService.getStoreUser.storeId).subscribe(
+      (response) => {
+        this.spinner.hide();
+        NotyUtil.success("Customer departed from store");
+        this.getStoreWaitingList();
+      },
+      (e) => {
+        this.spinner.hide();
+        const error = e.error.message || e.error.error;
+        NotyUtil.error(error);
+      },
+      () => this.spinner.hide()
+    );
   }
 }

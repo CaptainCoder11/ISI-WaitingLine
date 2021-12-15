@@ -9,7 +9,7 @@
               <div class="text-xs font-weight-bold text-uppercase mb-1">
                 Waiting List
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{stats.waitingListCount}}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-list-alt fa-2x text-gray-300"></i>
@@ -33,7 +33,7 @@
                     ">
                 Active User (in Store)
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">56</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{stats.insideStoreCount}}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -57,7 +57,7 @@
                     ">
                 No Of Employee
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{stats.employeesCount}}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-id-badge fa-2x text-gray-300"></i>
@@ -90,8 +90,11 @@
             <tr *ngFor="let customer of waitingLine">
               <td>{{customer.name}}</td>
               <td>{{customer.queueNumber}}</td>
-              <td class="d-flex">
-                <a class="btn btn-sm bg-danger btn-danger btn-circle">
+              <td>
+                <a class="btn btn-sm button-green btn-circle" (click)="customerArrivalInStore(customer.id)">
+                  Move inside store
+                </a>
+                <a class="btn btn-sm bg-danger btn-danger btn-circle ml-1">
                   Not available
                 </a>
               </td>
@@ -120,8 +123,8 @@
             <tr *ngFor="let customer of waitingLine">
               <td>{{customer.name}}</td>
               <td class="d-flex">
-                <a class="btn btn-sm bg-danger btn-danger btn-circle">
-                  Not available
+                <a class="btn btn-sm btn-warning btn-circle" (click)="customerDepartureFromStore(customer.id)">
+                  Departure
                 </a>
               </td>
             </tr>

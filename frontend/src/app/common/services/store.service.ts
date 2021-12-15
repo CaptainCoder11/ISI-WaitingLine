@@ -29,4 +29,14 @@ export class StoreService {
     const url = `${environment.api_url}/customer/remove-waiting-line/${userId}/${storeId}`;
     return this.httpClient.get<any>(url);
   }
+
+  customerArrival(userId: number, storeId: number): any {
+    const url = `${environment.api_url}/store/${storeId}/arrival/${userId}`;
+    return this.httpClient.get<any>(url);
+  }
+
+  customerDeparture(userId: number, storeId: number): any {
+    const url = `${environment.api_url}/store/${storeId}/departure/${userId}`;
+    return this.httpClient.get<any>(url);
+  }
 }

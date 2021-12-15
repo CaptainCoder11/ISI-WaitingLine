@@ -8,12 +8,13 @@ export class WaitingListFirebaseService {
   private WaitingList: string = 'waiting_list';
   constructor(private firestore: Firestore) { }
 
-  get(): Observable<any> {
+  getCustomerWaitingList(userId): Observable<any> {
     const waiting_list = collection(this.firestore, this.WaitingList);
-    return collectionData(waiting_list);
+    const data = query(waiting_list, where("id", "==", userId));
+    return collectionData(data);
   }
 
-  getStoreWaiting(storeId): Observable<any> {
+  getStoreWaitingList(storeId): Observable<any> {
     const waiting_list = collection(this.firestore, this.WaitingList);
     const data = query(waiting_list, where("storeId", "==", storeId));
     return collectionData(data);

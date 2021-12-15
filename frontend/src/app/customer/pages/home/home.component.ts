@@ -29,7 +29,7 @@ export class CustomerHomeComponent implements OnInit {
     private spinner: NgxSpinnerService,
     public authService: AuthenticationService,
     private dialogService: DialogService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -42,11 +42,12 @@ export class CustomerHomeComponent implements OnInit {
       (error) => this.spinner.hide()
     );
 
-    this.waitingListFirebaseService.get().subscribe((waitingList) => {
-      this.customerWaiting = waitingList.find(
-        (x) => x.id == this.authService.getCustomer?.id
-      );
-    });
+    if (this.authService.isCustomerAuthenticated())
+      this.waitingListFirebaseService.getCustomerWaitingList(this.authService.getCustomer.id).subscribe((waitingList) => {
+        this.customerWaiting = waitingList.find(
+          (x) => x.id == this.authService.getCustomer?.id
+        );
+      });
   }
 
   showStoreDetails(model) {

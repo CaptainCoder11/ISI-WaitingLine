@@ -189,3 +189,10 @@ img.store-logo {
 .active-link a:hover {
   color: #fff;
 }
+
+.ml-1{
+  margin-left: 10px;
+}
+.ml-2{
+  margin-left: 20px;
+}
