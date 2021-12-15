@@ -4,7 +4,7 @@ export interface CustomerWaiting {
     name: string;
     storeLogo: string;
     id: string;
-    storeId: string;
+    storeId: number;
     storeName: string;
     estimatedTime: string;
 }

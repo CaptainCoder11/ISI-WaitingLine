@@ -20,7 +20,7 @@ export class CustomerHomeComponent implements OnInit {
 
   stores: Store[];
   masterStoreList: Store[];
-  customerWaiting: CustomerWaiting;
+  waitingList: CustomerWaiting[];
   searchStore: string;
 
   constructor(
@@ -44,9 +44,7 @@ export class CustomerHomeComponent implements OnInit {
 
     if (this.authService.isCustomerAuthenticated())
       this.waitingListFirebaseService.getCustomerWaitingList(this.authService.getCustomer.id).subscribe((waitingList) => {
-        this.customerWaiting = waitingList.find(
-          (x) => x.id == this.authService.getCustomer?.id
-        );
+        this.waitingList = waitingList;
       });
   }
 
@@ -57,7 +55,7 @@ export class CustomerHomeComponent implements OnInit {
     });
     const inputData = dialog.content.instance;
     inputData.store = model;
-    inputData.customerWaiting = this.customerWaiting;
+    inputData.waitingList = this.waitingList;
 
     dialog.result.subscribe();
   }

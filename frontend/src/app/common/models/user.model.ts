@@ -5,4 +5,5 @@ export interface User {
     otp?: string;
     otpExpiry?: Date;
     phone?: string;
+    role?:string;
 }

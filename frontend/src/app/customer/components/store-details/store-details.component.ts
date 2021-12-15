@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DialogRef } from '@progress/kendo-angular-dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CustomerWaiting } from 'src/app/common/models/customer-waiting.model';
 import { Store } from 'src/app/common/models/store.model';
 import { AuthenticationService } from 'src/app/common/services/authentication.service';
 import { StoreService } from 'src/app/common/services/store.service';
@@ -19,17 +20,17 @@ export class CustomerStoreDetailsComponent implements OnInit {
   DISPLAY_LOGO = DISPLAY_LOGO;
   DISPLAY_STORE_STATUS = DISPLAY_STORE_STATUS;
 
-  @Input() customerWaiting: any;
-
+  @Input() waitingList: CustomerWaiting[];
   @Input() store: Store;
+
   constructor(
     private dialog: DialogRef,
     public authService: AuthenticationService,
     private spinner: NgxSpinnerService,
     private storeService: StoreService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onCancel(e: Event): void {
     this.closeForm();
@@ -37,6 +38,12 @@ export class CustomerStoreDetailsComponent implements OnInit {
 
   closeForm(): void {
     this.dialog.close();
+  }
+
+  canJoinWaitingList(store: Store) {
+    debugger;
+    const isStoreAlreadyJoined = this.waitingList.some(x => x.storeId == store.id);
+    return this.authService.isCustomerAuthenticated() && !isStoreAlreadyJoined;
   }
 
   joinWaitingLine(storeId) {

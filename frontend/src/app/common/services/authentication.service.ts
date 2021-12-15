@@ -4,6 +4,7 @@ import { map, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
 import { StoreUser } from 'src/app/store/models/store-user.model';
+import { ROLES } from '../models/roles.model';
 
 const LOCALSTORAGE = {
   CUSTOMER: 'customer',
@@ -20,7 +21,7 @@ export class AuthenticationService implements OnDestroy {
   public ON_LOGIN: Subject<User> = new ReplaySubject<any>(1);
   public ON_LOGOUT: Subject<void> = new Subject<void>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnDestroy(): void {
     this.ON_LOGIN.complete();
@@ -66,6 +67,7 @@ export class AuthenticationService implements OnDestroy {
 
     return this.http.post<User>(url, user).pipe(
       map((user) => {
+        user.role = ROLES.CUSTOMER;
         localStorage.setItem(LOCALSTORAGE.CUSTOMER, JSON.stringify(user));
         return of(this.whoAmI(user));
       })
