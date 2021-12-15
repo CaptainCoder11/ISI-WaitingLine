@@ -61,7 +61,7 @@ public class StoreServiceImpl implements IStoreService {
         //Have to change status in_store, firebase remove from queue, arrival time
         try {
             FBUser fbUser = customerService.getFbUser(userId, storeId);
-            Appointment appointment = appointmentService.findByIds(userId,storeId);
+            Appointment appointment = appointmentService.findByIds(userId,storeId,AppointmentStatus.In_Queue);
             appointment.setStatus(AppointmentStatus.In_Store);
             appointmentService.save(appointment);
             fbUserService.delete(fbUser);
@@ -76,17 +76,26 @@ public class StoreServiceImpl implements IStoreService {
         //Have to change status in_store, departure time
         try {
             FBUser fbUser = customerService.getFbUser(userId, storeId);
-            Appointment appointment = appointmentService.findByIds(userId,storeId);
+            Appointment appointment = appointmentService.findByIds(userId,storeId,AppointmentStatus.In_Store);
             appointment.setStatus(AppointmentStatus.Departed);
             appointmentService.save(appointment);
             fbUserService.delete(fbUser);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
-
-
-
+    @Override
+    @Transactional
+    public void remove(int userId, int storeId) throws ExecutionException, InterruptedException {
+        try {
+            FBUser fbUser = customerService.getFbUser(userId, storeId);
+            Appointment appointment = appointmentService.findByIds(userId,storeId,AppointmentStatus.In_Queue);
+            appointment.setStatus(AppointmentStatus.Rejected);
+            appointmentService.save(appointment);
+            fbUserService.delete(fbUser);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.isimtl.waitingline.service;
 
 import com.isimtl.waitingline.entity.Appointment;
+import com.isimtl.waitingline.entity.AppointmentStatus;
 import com.isimtl.waitingline.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
     }
 
     @Override
-    public Appointment findByIds(int userId, int storeId) {
-        Optional<Appointment> result = appointmentRepository.findByIDs(Integer.valueOf(userId),Integer.valueOf(storeId));
+    public Appointment findByIds(int userId, int storeId, AppointmentStatus status) {
+        Optional<Appointment> result = appointmentRepository.findUserByStatus(Integer.valueOf(userId),Integer.valueOf(storeId),status);
         Appointment appointment = null;
         if (result.isPresent())
             appointment = result.get();

@@ -56,4 +56,16 @@ public class StoreController {
         }
         return ResponseEntity.ok(true);
     }
+
+    @GetMapping(value = "/{storeId}/remove/{userId}")
+    public ResponseEntity<Boolean> userRemove(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId) {
+        try {
+            storeService.remove(userId, storeId);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.ok(true);
+    }
 }

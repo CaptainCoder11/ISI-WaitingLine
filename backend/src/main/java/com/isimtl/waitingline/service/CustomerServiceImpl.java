@@ -111,10 +111,10 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public void removeWaitingLine(int userId, int storeId) throws ExecutionException, InterruptedException {
+    public void removeWaitingLine(int userId, int storeId,AppointmentStatus status) throws ExecutionException, InterruptedException {
         try {
             FBUser fbUser = getFbUser(userId, storeId);
-            Appointment appointment = appointmentService.findByIds(userId,storeId);
+            Appointment appointment = appointmentService.findByIds(userId,storeId,status);
             System.out.println(appointment);
             appointment.setStatus(AppointmentStatus.Cancelled);
             appointmentService.save(appointment);

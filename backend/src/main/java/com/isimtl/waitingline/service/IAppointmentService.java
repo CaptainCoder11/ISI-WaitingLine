@@ -7,6 +7,5 @@ import com.isimtl.waitingline.entity.User;
 public interface IAppointmentService {
     public void save(Appointment appointment);
 
-
-    public Appointment findByIds(int userId, int storeId);
+    public Appointment findByIds(int userId, int storeId, AppointmentStatus status);
 }

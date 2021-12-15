@@ -14,5 +14,5 @@ public interface IStoreService {
 
     public void arrival(int userId, int storeId) throws ExecutionException, InterruptedException;
     public void departure(int userId, int storeId) throws ExecutionException, InterruptedException;
-
+    public void remove(int userId, int storeId) throws ExecutionException, InterruptedException;
 }

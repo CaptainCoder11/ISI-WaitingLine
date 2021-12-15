@@ -53,7 +53,7 @@ public class User {
 
     @JsonIgnore
     public String getVerificationData() {
-        return getName() + "/" + getEmail() + "/" + getPhone() + "/" + getOtp();
+        return getId()+ "/" +getName() + "/" + getEmail() + "/" + getPhone() + "/" + getOtp();
     }
 
     @Override
