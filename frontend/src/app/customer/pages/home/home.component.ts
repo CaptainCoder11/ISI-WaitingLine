@@ -55,7 +55,7 @@ export class CustomerHomeComponent implements OnInit {
     });
     const inputData = dialog.content.instance;
     inputData.store = model;
-    inputData.waitingList = this.waitingList;
+    inputData.waitingList = this.waitingList || [];
 
     dialog.result.subscribe();
   }
