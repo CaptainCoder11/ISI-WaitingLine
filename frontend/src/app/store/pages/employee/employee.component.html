@@ -15,31 +15,29 @@
   <div class="col-md-11 col-xs-12 card mb-3 box-shadow ms-5">
     <div class="row">
       <div class="container my-3">
-        <div class="row gx-5">
-          <div class="col mx-2 my-3">
-            <div class="p-3 border bg-light text-center">
-              <table class="table table-striped table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">Employee Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody *ngFor="let employee of employees$ | async">
-                  <tr>
-                    <td><{{ employee.fullName }}/td></td>
-                  </tr>
-                  <tr>
-                    <td><{{ employee.email }}/td></td>
-                  </tr>
-                  <tr>
-                    <td><{{ employee.password }}/td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="col mx-2 my-3">
+          <div class="p-3 text-center">
+            <table class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Employee Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let employee of employees$ | async">
+                <tr>
+                  <td><{{ employee.fullName }}/td></td>
+                </tr>
+                <tr>
+                  <td><{{ employee.email }}/td></td>
+                </tr>
+                <tr>
+                  <td><{{ employee.password }}/td></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

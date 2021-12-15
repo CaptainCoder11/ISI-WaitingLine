@@ -36,7 +36,7 @@
             >Home <span class="sr-only"></span
           ></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item active" *ngIf="isStoreOwner">
           <a class="nav-link" [routerLink]="['/store', 'employees']"
             >Employees <span class="sr-only"></span
           ></a>
@@ -57,7 +57,7 @@
             ngbDropdownMenu
             aria-labelledby="navbarScrollingDropdown"
           >
-            <li ngbDropdownItem>
+            <li ngbDropdownItem *ngIf="isStoreOwner">
               <a class="dropdown-item">Store Info </a>
             </li>
             <li ngbDropdownItem>

@@ -1,6 +1,6 @@
 <div class="row">
   <!-- no of people in queue-->
-  <div class="col-xl-4 col-md-6 ">
+  <div class="col-xl-4 col-md-6">
     <div class="card border-left-primary shadow h-100 py-2">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
@@ -8,7 +8,9 @@
             <div class="text-xs font-weight-bold text-uppercase mb-1">
               Waiting List
             </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">{{stats.waitingListCount}}</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{ masterWaitingLine.length }}
+            </div>
           </div>
           <div class="col-auto">
             <i class="fas fa-list-alt fa-2x text-gray-300"></i>
@@ -19,20 +21,19 @@
   </div>
 
   <!-- No of people inside store -->
-  <div class="col-xl-4 col-md-6 ">
+  <div class="col-xl-4 col-md-6">
     <div class="card border-left-success shadow h-100 py-2">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
-            <div class="
-                      text-xs
-                      font-weight-bold
-                      text-success text-uppercase
-                      mb-1
-                    ">
+            <div
+              class="text-xs font-weight-bold text-success text-uppercase mb-1"
+            >
               Active User (in Store)
             </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">{{stats.insideStoreCount}}</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{ masterCustomerInsideStore.length }}
+            </div>
           </div>
           <div class="col-auto">
             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -43,20 +44,17 @@
   </div>
 
   <!-- Total Employee -->
-  <div class="col-xl-4 col-md-6 ">
+  <div class="col-xl-4 col-md-6" *ngIf="isStoreOwner">
     <div class="card border-left-warning shadow h-100 py-2">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
-            <div class="
-                      text-xs
-                      font-weight-bold
-                      text-warning text-uppercase
-                      mb-1
-                    ">
+            <div
+              class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+            >
               No Of Employee
             </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">{{stats.employeesCount}}</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">WIP</div>
           </div>
           <div class="col-auto">
             <i class="fas fa-id-badge fa-2x text-gray-300"></i>
@@ -71,8 +69,13 @@
     <div class="card shadow">
       <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold">Customers In Waiting Line</h6>
-        <input type="email" class="form-control" placeholder="Search customer" (input)="onSearchInWaitingLine($event)"
-          style="max-width: 300px;" />
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Search customer"
+          (input)="onSearchInWaitingLine($event)"
+          style="max-width: 300px"
+        />
       </div>
       <div class="card-body">
         <table class="table table-striped">
@@ -85,14 +88,20 @@
           </thead>
           <tbody>
             <tr *ngFor="let customer of waitingLine">
-              <td>{{customer.name}}</td>
-              <td>{{customer.queueNumber}}</td>
+              <td>{{ customer.name }}</td>
+              <td>{{ customer.queueNumber }}</td>
               <td>
-                <a class="btn btn-sm button-green btn-circle" (click)="customerArrivalInStore(customer.id)">
+                <a
+                  class="btn btn-sm button-green btn-circle"
+                  (click)="customerArrivalInStore(customer.id)"
+                >
                   Move inside store
                 </a>
-                <a class="btn btn-sm bg-danger btn-danger btn-circle ml-1">
-                  Not available
+                <a
+                  class="btn btn-sm bg-danger btn-danger btn-circle ml-1"
+                  (click)="customerRemoveFromWaitingList(customer.id)"
+                >
+                  Reject
                 </a>
               </td>
             </tr>
@@ -105,8 +114,13 @@
     <div class="card shadow">
       <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold">Customers Inside Store</h6>
-        <input type="email" class="form-control" placeholder="Search customer" (input)="onSearchInWaitingLine($event)"
-          style="max-width: 300px;" />
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Search customer"
+          (input)="onSearchInsideStore($event)"
+          style="max-width: 300px"
+        />
       </div>
       <div class="card-body">
         <table class="table table-striped">
@@ -117,10 +131,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let customer of waitingLine">
-              <td>{{customer.name}}</td>
+            <tr *ngFor="let customer of customerInsideStore">
+              <td>{{ customer.user.name }}</td>
               <td class="d-flex">
-                <a class="btn btn-sm btn-warning btn-circle" (click)="customerDepartureFromStore(customer.id)">
+                <a
+                  class="btn btn-sm btn-warning btn-circle"
+                  (click)="customerDepartureFromStore(customer.user.id)"
+                >
                   Departure
                 </a>
               </td>
@@ -132,15 +149,19 @@
   </div>
 </div>
 
-<div class="row mt-3">
+<div class="row mt-3" *ngIf="isStoreOwner">
   <div class="col-md-12">
     <div class="card shadow">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold">Total Visits</h6>
       </div>
       <div class="card-body">
-        <highcharts-chart class="w-100" [Highcharts]="Highcharts" [options]="totalVisitsChartOptions"
-          style="display: flex"></highcharts-chart>
+        <highcharts-chart
+          class="w-100"
+          [Highcharts]="Highcharts"
+          [options]="totalVisitsChartOptions"
+          style="display: flex"
+        ></highcharts-chart>
       </div>
     </div>
   </div>

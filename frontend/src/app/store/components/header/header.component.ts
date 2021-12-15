@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ROLES } from 'src/app/common/models/roles.model';
 import { AuthenticationService } from 'src/app/common/services/authentication.service';
 import { DISPLAY_LOGO } from 'src/app/common/utils/functions';
 import { NotyUtil } from 'src/app/common/utils/noty-util';
@@ -30,5 +31,9 @@ export class StoreHeaderComponent implements OnInit {
     this.authService.storeLogout();
     NotyUtil.success('You are logged out!!!');
     this.router.navigate(['store', 'login']);
+  }
+
+  get isStoreOwner() {
+    return this.storeUser.role == ROLES.STOREOWNER;
   }
 }
