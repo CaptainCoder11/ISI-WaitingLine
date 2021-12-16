@@ -15,10 +15,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.result.Result
 import com.isimtl.waitingline.Api.BASE_URL
-import com.isimtl.waitingline.Exensions.Prefs
-import com.isimtl.waitingline.Exensions.log
-import com.isimtl.waitingline.Exensions.putAny
-import com.isimtl.waitingline.Exensions.toast
+import com.isimtl.waitingline.Exensions.*
 import com.isimtl.waitingline.Extensions.backgroundscope
 import com.isimtl.waitingline.Extensions.mainscope
 import com.isimtl.waitingline.Models.Otp
@@ -32,6 +29,9 @@ class OtpView(context: Context,uid:Int) : BlurPopupWindow(context) {
     override fun createContentView(parent: ViewGroup): View {
         val view = LayoutInflater.from(context).inflate(R.layout.otp_layout, parent, false)
         view.visibility = INVISIBLE
+        view?.otpback?.setOnClickListener {
+            (context as Activity).openActivity(Login::class.java)
+        }
         view?.btverify?.setOnClickListener {
             view?.otp_view?.otp?.log()
             val paramObject = JSONObject()

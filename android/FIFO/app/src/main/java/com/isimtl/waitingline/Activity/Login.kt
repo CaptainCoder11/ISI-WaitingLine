@@ -20,10 +20,7 @@ import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.fuel.json.responseJson
 import com.github.kittinunf.result.Result
 import com.isimtl.waitingline.Api.BASE_URL
-import com.isimtl.waitingline.Exensions.Prefs
-import com.isimtl.waitingline.Exensions.font
-import com.isimtl.waitingline.Exensions.log
-import com.isimtl.waitingline.Exensions.toast
+import com.isimtl.waitingline.Exensions.*
 import com.isimtl.waitingline.Extensions.backgroundscope
 import com.isimtl.waitingline.Extensions.mainscope
 import com.isimtl.waitingline.Models.Otp
@@ -48,7 +45,7 @@ class Login : AppCompatActivity() {
         btsubmit.font("Poppins-Bold.ttf")
 
         homeback.setOnClickListener {
-            finish()
+            openActivity(StoreDetails::class.java)
         }
 
         btsubmit.setOnClickListener {
