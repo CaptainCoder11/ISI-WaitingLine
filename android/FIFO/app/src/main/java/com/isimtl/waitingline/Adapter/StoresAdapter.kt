@@ -6,21 +6,21 @@ import android.util.Base64
 import android.view.*
 import java.util.ArrayList
 import androidx.recyclerview.widget.RecyclerView
-import com.isimtl.waitingline.Adapter.ExampleAdapter.ExampleViewHolder
+import com.isimtl.waitingline.Adapter.StoresAdapter.ExampleViewHolder
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.isimtl.waitingline.Exensions.Prefs
-import com.isimtl.waitingline.Exensions.font
-import com.isimtl.waitingline.Exensions.putAny
+import com.isimtl.waitingline.Activity.Login
+import com.isimtl.waitingline.Api.joinline
+import com.isimtl.waitingline.Exensions.*
 import com.isimtl.waitingline.Extensions.backgroundscope
 import com.isimtl.waitingline.Extensions.mainscope
 import com.isimtl.waitingline.Models.Store
 import com.isimtl.waitingline.R
+import kotlinx.android.synthetic.main.activity_store_dialog.*
 import kotlinx.coroutines.launch
-import java.util.*
 
-class ExampleAdapter(private val mcontext: Context, private val mExampleList: ArrayList<Store>) : RecyclerView.Adapter<ExampleViewHolder>() {
+class StoresAdapter(private val mcontext: Context, private val mExampleList: ArrayList<Store>) : RecyclerView.Adapter<ExampleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view, parent, false)
         return ExampleViewHolder(v)
@@ -47,11 +47,46 @@ class ExampleAdapter(private val mcontext: Context, private val mExampleList: Ar
            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
            dialog.setContentView(R.layout.activity_store_dialog)
            dialog.setCanceledOnTouchOutside(true)
-           dialog.setCanceledOnTouchOutside(false);
-           dialog.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-           dialog.show()
+           dialog.setCanceledOnTouchOutside(false)
+           dialog.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+           backgroundscope.launch {
+               val image = Base64.decode(currentItem.logo, Base64.DEFAULT)
+               mainscope.launch {
+                   Glide.with(mcontext).asBitmap()
+                       .load(image)
+                       .placeholder(R.mipmap.store)
+                       .into(dialog.img_store_dialog)
+               }
+           }
+           dialog.tvstorename.font("Poppins-Bold.ttf")
+           dialog.tvopeningtime.font("DidactGothic-Regular.ttf")
+           dialog.tvclosingtime.font("DidactGothic-Regular.ttf")
+           dialog.btjoinline.font("DidactGothic-Regular.ttf")
+           dialog.btlogin.font("DidactGothic-Regular.ttf")
+           dialog.tvor.font("DancingScript.ttf")
+           var login = Prefs?.getBoolean("islogin",false)
+           if(login!!) {
+               dialog.tvor.hide()
+               dialog.btlogin.hide()
+           }
 
-           Prefs?.putAny("storeid", currentItem.id)
+           dialog.btjoinline.setOnClickListener {
+               if (!login) {
+                   mcontext.openActivity(Login::class.java)
+                   {
+                       putString("storeid",currentItem.id)
+                   }
+               }
+               else
+               {
+                   var uid = Prefs?.getInt("userid",0)
+                   joinline(storeid= currentItem.id.toInt(), userid =  uid!!)
+               }
+
+           }
+
+
+           dialog.show()
 
 
        }

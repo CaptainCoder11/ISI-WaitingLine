@@ -116,7 +116,7 @@
         <Button
             android:id="@+id/btremovequeue"
             android:layout_width="@dimen/_75sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginLeft="@dimen/_7sdp"
             android:background="@drawable/rounded_button"
             android:textColor="@color/white"

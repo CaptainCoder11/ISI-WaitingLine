@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp"
+    android:background="@color/white"
     tools:context=".Activity.StoreDialog">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:padding="@dimen/_10sdp"
+        android:orientation="vertical"
+        android:background="@color/secondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:id="@+id/img_store_dialog"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="@dimen/_105sdp"
+            android:layout_height="@dimen/_105sdp"></ImageView>
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:text="Marche Indiene"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/white"
+            android:id="@+id/tvstorename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+          <TextView
+              android:textColor="@color/white"
+              android:textSize="@dimen/_10ssp"
+              android:text="Opens: 10:00 A.M"
+              android:id="@+id/tvopeningtime"
+              android:layout_width="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_height="wrap_content"></TextView>
+
+            <TextView
+                android:id="@+id/tvclosingtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp"
+                android:text="Closes: 06:00 P.M"
+                android:layout_alignParentRight="true"
+                ></TextView>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btjoinline"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:background="@drawable/rounded_button_white"
+            android:text="Join Waiting Line"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:layout_width="@dimen/_125sdp"
+            android:layout_height="@dimen/_35sdp"></Button>
+
+        <TextView
+            android:id="@+id/tvor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15ssp"
+            android:text="OR"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
+            ></TextView>
+
+
+        <Button
+            android:id="@+id/btlogin"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/rounded_button_white"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:layout_width="@dimen/_105sdp"
+            android:layout_height="@dimen/_35sdp"></Button>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

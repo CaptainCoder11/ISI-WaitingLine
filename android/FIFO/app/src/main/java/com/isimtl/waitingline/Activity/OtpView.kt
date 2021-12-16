@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.result.Result
 import com.isimtl.waitingline.Api.BASE_URL
+import com.isimtl.waitingline.Api.joinline
 import com.isimtl.waitingline.Exensions.*
 import com.isimtl.waitingline.Extensions.backgroundscope
 import com.isimtl.waitingline.Extensions.mainscope
@@ -24,8 +25,9 @@ import kotlinx.android.synthetic.main.otp_layout.view.*
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
-class OtpView(context: Context,uid:Int) : BlurPopupWindow(context) {
+class OtpView(context: Context,storeid:String,uid:Int) : BlurPopupWindow(context) {
     private var uid = uid
+    private var storeid = storeid
     override fun createContentView(parent: ViewGroup): View {
         val view = LayoutInflater.from(context).inflate(R.layout.otp_layout, parent, false)
         view.visibility = INVISIBLE
@@ -57,6 +59,13 @@ class OtpView(context: Context,uid:Int) : BlurPopupWindow(context) {
                             mainscope.launch { context.toast("Correct!") }
                             Prefs?.putAny("islogin",true)
                             Prefs?.putAny("userid",data.id)
+
+                            if(!storeid.isNullOrEmpty())
+                            {
+                                joinline(storeid = storeid.toInt(),userid = data.id)
+                            }
+
+
                             (context as Activity).finish()
                         }
                     }
@@ -95,11 +104,12 @@ class OtpView(context: Context,uid:Int) : BlurPopupWindow(context) {
             )
     }
 
-    class Builder(context: Context?,id:Int) : BlurPopupWindow.Builder<OtpView>(context) {
+    class Builder(context: Context?,storeid:String,id:Int) : BlurPopupWindow.Builder<OtpView>(context) {
         private var id = id
+        private var storeid = storeid
 
         override fun createPopupWindow(): OtpView {
-            return OtpView(mContext, id)
+            return OtpView(mContext, storeid , id)
         }
 
         init {

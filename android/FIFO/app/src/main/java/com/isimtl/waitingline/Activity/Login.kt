@@ -48,6 +48,8 @@ class Login : AppCompatActivity() {
             openActivity(StoreDetails::class.java)
         }
 
+        var storeid = Prefs?.getString("storeid","")
+
         btsubmit.setOnClickListener {
             if (et_email.text.isNullOrEmpty() && et_phone.text.isNullOrEmpty() && et_name.text.isNullOrEmpty()) {
                 toast("Please Enter Name and Phone or Email")
@@ -71,7 +73,7 @@ class Login : AppCompatActivity() {
                             var data = result.component1()
                             if (data?.id != null) {
                                 mainscope.launch {
-                                    OtpView.Builder(this@Login, data.id).build().show()
+                                    OtpView.Builder(this@Login, storeid!! , data.id).build().show()
                                 }
                             }
                         }

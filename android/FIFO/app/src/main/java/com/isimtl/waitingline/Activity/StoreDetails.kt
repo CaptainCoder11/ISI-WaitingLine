@@ -16,13 +16,13 @@ import java.util.ArrayList
 import com.isimtl.waitingline.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.FuelManager
 import com.github.kittinunf.result.Result
-import com.isimtl.waitingline.Adapter.ExampleAdapter
+import com.isimtl.waitingline.Adapter.StoresAdapter
 import com.isimtl.waitingline.Api.BASE_URL
 import com.isimtl.waitingline.Exensions.*
 import com.isimtl.waitingline.Extensions.backgroundscope
 import com.isimtl.waitingline.Extensions.mainscope
-import com.isimtl.waitingline.Models.Otp
 import com.isimtl.waitingline.Models.Store
 import kotlinx.android.synthetic.main.store_details.*
 import kotlinx.coroutines.launch
@@ -37,6 +37,8 @@ class StoreDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.store_details)
 
+        FuelManager.instance.basePath = BASE_URL
+
         Prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         btlogin.font("DidactGothic-Regular.ttf")
@@ -45,7 +47,7 @@ class StoreDetails : AppCompatActivity() {
         etsearch.font("DidactGothic-Regular.ttf")
 
         backgroundscope.launch {
-            val (request, response, result) = Fuel.get(BASE_URL + "store").responseObject(Store.Deserializer())
+            val (request, response, result) = Fuel.get( "store").responseObject(Store.Deserializer())
             when (result) {
                 is Result.Failure -> {
                     val ex = result.getException()
@@ -100,7 +102,7 @@ class StoreDetails : AppCompatActivity() {
     fun initstores(list:ArrayList<Store>){
         recyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(this)
-        mAdapter = ExampleAdapter(this,list)
+        mAdapter = StoresAdapter(this,list)
         recyclerView.setLayoutManager(mLayoutManager)
         recyclerView.setAdapter(mAdapter)
     }
