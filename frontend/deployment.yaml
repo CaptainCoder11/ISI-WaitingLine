@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fifo-angular-frontend
+spec:
+  selector:
+    matchLabels:
+      app: fifo-angular-frontend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: fifo-angular-frontend
+    spec:
+      containers:
+      - name: fifo-angular-frontend
+        image: mrpatel1234/fifo:fifo-frontend
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fifo-angular-frontend-service
+spec:
+  selector:
+    app: fifo-angular-frontend
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+   
+
+
+
