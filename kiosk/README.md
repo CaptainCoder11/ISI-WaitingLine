@@ -2,6 +2,22 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
+## ElectronPackager
+
+Scripts created in package.json file to create packages for different OS.
+
+### Windows
+
+npm run package-win
+
+### Mac
+
+npm run package-mac
+
+### Linux
+
+npm run package-linux
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
