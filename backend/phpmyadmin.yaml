@@ -22,14 +22,12 @@ spec:
             - containerPort: 80
           env:
             - name: PMA_HOST
-              value: "192.99.108.204"
-            - name: PMA_PORT
-              value: "30036"
+              value: "mysql-fifo-service"
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mysql-secrets
-                  key: root-password
+                  key: root-password    
 ---                  
 apiVersion: v1
 kind: Secret
@@ -51,12 +49,3 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80  
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: phpmyadmin-http-ingress
-spec:
-  backend:
-    serviceName: phpmyadmin-service
-    servicePort: 80    

@@ -29,6 +29,12 @@
         </dependency>
 
         <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>1.5.7</version>
+    </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
@@ -110,6 +116,17 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+            <version>1.4.9</version>
+            <configuration>
+                <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                <buildArgs>
+                    <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                </buildArgs>
+            </configuration>
             </plugin>
         </plugins>
     </build>

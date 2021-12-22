@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: fifo-backend
-  replicas: 2  
+  replicas: 1
   template:
     metadata:
       labels:
@@ -14,14 +14,10 @@ spec:
     spec:
       containers:
       - name: fifo-backend
-        image: mrpatel1234/fifo:fifo-backend
+        image: mrpatel1234/fifo:fifo-backend-v1
         imagePullPolicy: Always
-        resources:
-          limits: 
-            memory: "128Mi"
-            cpu: "500m"
         ports:
-        - containerPort: 3001
+        - containerPort: 3333
 ---
 apiVersion: v1
 kind: Service
@@ -33,6 +29,6 @@ spec:
     app: fifo-backend
   ports:
   - protocol: TCP
-    port: 3001
-    targetPort: 3001         
+    port: 3333
+    targetPort: 3333         
           

@@ -14,7 +14,7 @@ services:
     build: ./backend
     image: backend
     ports:
-      - 3001:3001
+      - 3333:3333
         # TODO:
         # environment:
         #   CONFIG_MYSQL_DATABASE: fifo
@@ -29,7 +29,7 @@ services:
 
   db:
     container_name: db
-    image: mysql:5.7
+    image: mariadb
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_HOST_IP: db
