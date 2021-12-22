@@ -40,11 +40,11 @@ metadata:
     name: fifo-ingress
 spec:
   rules:
-  - host: fifo.com
+  - host: 192.99.108.204
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: "/backend"
         backend:
           service:
             name: fifo-backend-service
