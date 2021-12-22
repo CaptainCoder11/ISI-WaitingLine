@@ -1,13 +1,11 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: flyway-fifo
+  name: flyway-fifo-v1
 spec:
-  ttlSecondsAfterFinished: 100
   template:
     spec:
       containers:
       - name: flyway-fifo
         image: mrpatel1234/fifo:fifo-flyway
-        command: ["-X", "-url=jdbc:mariadb://mysql-fifo-service/fifo?allowPublicKeyRetrieval=true&useSSL=false&serverTimeZon=UTC", "-user=root", "-password=root", "-connectRetries=100", "migrate"]
       restartPolicy: Never
