@@ -8,6 +8,6 @@ spec:
     spec:
       containers:
       - name: flyway-fifo
-        image: flyway/flyway:7
-        command: ["-X", "-url=jdbc:mariadb://mysql-fifo-service/fifo?allowPublicKeyRetrieval=true&useSSL=false&serverTimeZon=UTC", "-user=root", "-password=root", "-connectRetries=100", "migrate"]
+        image: mrpatel1234/fifo:fifo-flyway
+        command: ["-url=jdbc:mariadb://mysql-fifo-service/fifo?allowPublicKeyRetrieval=true&useSSL=false&serverTimeZon=UTC", "-user=root", "-password=root", "-connectRetries=100", "migrate"]
       restartPolicy: Never
