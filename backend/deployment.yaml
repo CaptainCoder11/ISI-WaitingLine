@@ -40,7 +40,7 @@ metadata:
     name: fifo-ingress
 spec:
   rules:
-  - host: 192.99.108.204
+  - host: http://192.99.108.204/
     http:
       paths:
       - pathType: Prefix
