@@ -39,7 +39,7 @@ metadata:
   labels:
     name: fifo-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /    
+    nginx.ingress.kubernetes.io/app-root: / 
 spec:
   rules:
     - http:
@@ -51,5 +51,12 @@ spec:
               name: fifo-backend-service
               port: 
                 number: 3333
+        - pathType: Prefix
+          path: "/frontend"
+          backend:
+            service:
+              name: fifo-backend-service
+              port: 
+                number: 3333        
             
 
