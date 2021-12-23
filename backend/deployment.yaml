@@ -45,9 +45,12 @@ spec:
   rules:
     - http:
         paths:
-        - backend:
-            serviceName: fifo-backend-service
-            servicePort: 3333
-          path: /backend(/|$)(.*) 
+        - pathType: Prefix
+          path: /backend(/|$)(.*)
+          backend:
+            service:
+              name: fifo-backend-service
+              port: 
+                number: 3333     
             
 
