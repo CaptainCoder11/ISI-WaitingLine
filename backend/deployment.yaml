@@ -38,8 +38,6 @@ metadata:
   name: fifo-ingress
   labels:
     name: fifo-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/force-ssl-redirect: \"false\"
 spec:
   rules:
     - http:
