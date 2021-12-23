@@ -39,14 +39,14 @@ metadata:
   labels:
     name: fifo-ingress
   annotations:
-   nginx.ingress.kubernetes.io/rewrite-target: /$1
+   nginx.ingress.kubernetes.io/rewrite-target: /$2
    kubernetes.io/ingress.class: nginx
 spec:
   rules:
     - http:
         paths:
         - pathType: Prefix
-          path: "/backend/(.*)"
+          path: /backend(/|$)(.*)
           backend:
             service:
               name: fifo-backend-service
