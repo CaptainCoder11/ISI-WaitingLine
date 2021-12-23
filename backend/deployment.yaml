@@ -38,6 +38,7 @@ metadata:
   name: fifo-ingress
   labels:
     name: fifo-ingress
+  nginx.ingress.kubernetes.io/rewrite-target: /  
 spec:
   rules:
     - http:
