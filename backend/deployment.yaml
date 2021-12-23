@@ -45,7 +45,7 @@ spec:
     - http:
         paths:
         - pathType: Prefix
-          path: /backend/*
+          path: /backend
           backend:
             service:
               name: fifo-backend-service
