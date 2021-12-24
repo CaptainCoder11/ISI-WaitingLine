@@ -20,7 +20,6 @@ public class Appointment {
     @Column(name = "id")
     private int id;
 
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -16,10 +16,6 @@ spec:
       - name: fifo-angular-frontend
         image: mrpatel1234/fifo:fifo-frontend
         imagePullPolicy: Always
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 80
       imagePullSecrets:
@@ -36,7 +32,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-   
+
 
 
 
