@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Objects;
 
+
 @SpringBootApplication
 @EnableSwagger2
 @EnableJpaRepositories("com.isimtl.waitingline.repository")
@@ -46,6 +47,6 @@ public class WaitinglineApplication {
     public Docket swagger() {
         return new Docket(DocumentationType.SWAGGER_2).select()
                 .apis(RequestHandlerSelectors.basePackage("com.isimtl.waitingline.controller")).build();
-
     }
+
 }
