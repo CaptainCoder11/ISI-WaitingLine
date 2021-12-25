@@ -61,6 +61,6 @@ spec:
             service:
               name: fifo-frontend-service
               port: 
-                number: 80        
+                number: 3333        
             
 
