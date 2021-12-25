@@ -24,7 +24,7 @@ kind: Service
 metadata:
   name: fifo-backend-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: fifo-backend
   ports:

@@ -30,6 +30,6 @@ public class WaitinglineApplication {
 
     @Bean
     public Docket swagger() {
-        return new Docket(DocumentationType.SWAGGER_2).host("").select().apis(basePackage("com.isimtl.waitingline.controller")).build();
+        return new Docket(DocumentationType.SWAGGER_2).select().apis(basePackage("com.isimtl.waitingline.controller")).build();
     }
 }
