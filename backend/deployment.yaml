@@ -59,7 +59,7 @@ spec:
           path: /frontend(/|$)(.*)
           backend:
             service:
-              name: fifo-frontend-service
+              name: fifo-angular-frontend-service
               port: 
                 number: 80        
             
