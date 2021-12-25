@@ -20,9 +20,8 @@ public class Appointment {
     @Column(name = "id")
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private int userId;
 
     @Column(name = "store_id")
     private int storeId;
@@ -43,5 +42,11 @@ public class Appointment {
     @Column(name = "date_created")
     private LocalDateTime dateCreated;
 
-
+    public Appointment(int id, int userId, int storeId, AppointmentStatus status) {
+        this.id = id;
+        this.userId = userId;
+        this.storeId = storeId;
+        this.status = status;
+        this.dateCreated = LocalDateTime.now();
+    }
 }
