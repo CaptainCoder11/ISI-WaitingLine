@@ -53,7 +53,7 @@ spec:
           backend:
             service:
               name: fifo-backend-service
-              port: 
+              port:   
                 number: 3333
         - pathType: Prefix
           path: /frontend(|$)(.*)
@@ -61,5 +61,4 @@ spec:
             service:
               name: fifo-angular-frontend-service
               port: 
-                number: 80        
-            
+                number: 80           
