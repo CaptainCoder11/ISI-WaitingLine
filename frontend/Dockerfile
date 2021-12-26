@@ -1,22 +1,12 @@
-FROM node:16-alpine
-
-# set working directory
+FROM node:16-alpine as build-stage
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
-
-# add app
+COPY package*.json /app/
+RUN npm install
 COPY . ./
+ARG configuration=production
+RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
-RUN npm cache clean --force
-RUN npm cache verify
-RUN npm install --silent
+FROM nginx:1.15
+COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-# start app
-EXPOSE 80
-CMD ["npm", "start"]
