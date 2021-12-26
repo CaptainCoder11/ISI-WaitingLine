@@ -18,5 +18,5 @@ RUN npm cache verify
 RUN npm install --silent
 
 # start app
-EXPOSE 8080
+EXPOSE 80
 CMD ["npm", "start"]
