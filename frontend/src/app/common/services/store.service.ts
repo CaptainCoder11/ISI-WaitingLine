@@ -11,6 +11,7 @@ export class StoreService {
   constructor(private httpClient: HttpClient) {}
 
   getAll(): Observable<Store[]> {
+    console.log(this._url)
     return this.httpClient.get<Store[]>(this._url);
   }
 
