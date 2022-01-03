@@ -7,5 +7,5 @@ spec:
     spec:
       containers:
       - name: flyway-fifo
-        image: mrpatel1234/fifo:fifo-flyway
+        image: mrpatel1234/fifo:flyway
       restartPolicy: Never

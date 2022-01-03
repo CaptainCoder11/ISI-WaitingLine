@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fifo-angular-frontend
-        image: mrpatel1234/fifo:fifo-frontend
+        image: mrpatel1234/fifo:frontend
         imagePullPolicy: Always
         ports:
         - containerPort: 80

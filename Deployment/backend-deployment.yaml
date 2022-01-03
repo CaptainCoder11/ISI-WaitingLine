@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fifo-backend
-        image: mrpatel1234/fifo:fifo-backend-v1
+        image: mrpatel1234/fifo:backend
         imagePullPolicy: Always
         ports:
         - containerPort: 3333
