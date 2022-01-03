@@ -30,7 +30,6 @@ spec:
   selector:
     app: fifo-backend
   ports:
-  - protocol: TCP
-    port: 3333
-    targetPort: 3333         
+    - protocol: TCP
+      port: 3333    
       
