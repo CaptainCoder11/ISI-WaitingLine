@@ -22,7 +22,7 @@ spec:
               port:   
                 number: 3333
         - pathType: Prefix
-          path: /frontend(/|$)(.*)
+          path: /frontend(|$)(.*)
           backend:
             service:
               name: fifo-angular-frontend-service
