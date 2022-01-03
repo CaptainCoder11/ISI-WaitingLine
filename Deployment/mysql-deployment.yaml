@@ -10,21 +10,21 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysqldb-service
+  name: mysql-fifo-service
   labels:
-    app: mysqldb-service
+    app: mysql-fifo-service
 spec:
   selector:
     matchLabels:
-      app: mysqldb-service
+      app: mysql-fifo-service
   replicas: 1 
   template:
     metadata:
       labels:
-        app: mysqldb-service
-        tier: mysqldb-service
+        app: mysql-fifo-service
+        tier: mysql-fifo-service
     spec:
-      hostname: mysqldb-service
+      hostname: mysql-fifo-service
       containers:
       - name: mysqldb-service
         image: jamielsharief/mysql:latest
@@ -55,14 +55,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysqldb-service
+  name: mysql-fifo-service
   labels:
-    app: mysqldb-service
+    app: mysql-fifo-service
 spec:
   type: NodePort
   selector:
-    app: mysqldb-service
-    tier: mysqldb-service
+    app: mysql-fifo-service
+    tier: mysql-fifo-service
   ports:
   - port: 3001
     targetPort : 3001
