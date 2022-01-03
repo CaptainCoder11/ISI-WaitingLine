@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fifo-backend
+spec:
+  selector:
+    matchLabels:
+      app: fifo-backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: fifo-backend
+    spec:
+      containers:
+      - name: fifo-backend
+        image: mrpatel1234/fifo:fifo-backend-v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3333
+      imagePullSecrets:
+      - name: registrypullsecret          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fifo-backend-service
+spec:
+  type: NodePort
+  selector:
+    app: fifo-backend
+  ports:
+  - protocol: TCP
+    port: 3333
+    targetPort: 30368         
+      
