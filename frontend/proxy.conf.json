@@ -1,12 +1,8 @@
 {
-  "/api/": {
+  "/api/*": {
     "target": "http://192.99.108.204/backend",
     "secure": false,
-      "logLevel": "debug",
-      "changeOrigin": true,
-      "pathRewrite": {
-         "^/api/settings": "/api/app/settings",
-         "^/api": "http://192.99.108.204/backend"
-      }
+    "logLevel": "debug",
+    "changeOrigin": true
   }
 }
