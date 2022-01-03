@@ -35,11 +35,7 @@ spec:
               name: mysql-secret
               key: password
         - name: MYSQL_DATABASE
-          value: fifo      
-        - name: MYSQL_USER
-          value: root   
-        - name: MYSQL_PASSWORD
-          value: root          
+          value: fifo                
         ports:
         - containerPort: 3001
 ---
