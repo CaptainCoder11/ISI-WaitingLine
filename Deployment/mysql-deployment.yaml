@@ -37,7 +37,7 @@ spec:
         - name: MYSQL_DATABASE
           value: fifo                
         ports:
-        - containerPort: 3001
+        - containerPort: 3306
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -64,6 +64,6 @@ spec:
     app: mysql-fifo-service
     tier: mysql-fifo-service
   ports:
-  - port: 3001
-    targetPort : 3001
+  - port: 3306
+    targetPort : 3306
     protocol: TCP
