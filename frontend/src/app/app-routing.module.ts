@@ -9,14 +9,14 @@ const routes: Routes = [
     component: AppComponent,
     children: [
       {
-        path: '',
+        path: '/',
         loadChildren: () =>
           import('../app/customer/customer.module').then(
             (x) => x.CustomerModule
           ),
       },
       {
-        path: 'store',
+        path: '/store',
         loadChildren: () =>
           import('../app/store/store.module').then((x) => x.StoreModule),
       },
