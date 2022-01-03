@@ -8,4 +8,6 @@ spec:
       containers:
       - name: flyway-fifo
         image: mrpatel1234/fifo:flyway
+      imagePullSecrets:
+      - name: regcred  
       restartPolicy: Never
