@@ -2,4 +2,4 @@ FROM flyway/flyway:7.7.3-alpine
 
 COPY /sql /flyway/sql/
 
-CMD ["-url=jdbc:mysql://mysql-fifo-service/fifo?allowPublicKeyRetrieval=true&useSSL=false&serverTimeZon=UTC", "-user=root", "-password=root", "-connectRetries=100", "migrate"]
+CMD ["-url=jdbc:mariadb://mysql-fifo-service/fifo?allowPublicKeyRetrieval=true&useSSL=false&serverTimeZon=UTC", "-user=root", "-password=root", "-connectRetries=100", "migrate"]

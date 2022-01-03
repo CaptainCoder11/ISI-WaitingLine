@@ -27,7 +27,7 @@ spec:
       hostname: mysql-fifo-service
       containers:
       - name: mysql-fifo-service
-        image: mysql:5.7
+        image: mariadb
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
@@ -35,7 +35,11 @@ spec:
               name: mysql-secret
               key: password
         - name: MYSQL_DATABASE
-          value: fifo            
+          value: fifo      
+        - name: MYSQL_USER
+          value: root   
+        - name: MYSQL_PASSWORD
+          value: root          
         ports:
         - containerPort: 3001
 ---
