@@ -26,11 +26,11 @@ kind: Service
 metadata:
   name: fifo-backend-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: fifo-backend
   ports:
   - protocol: TCP
     port: 3333
-    targetPort: 30368         
+    targetPort: 3333         
       
