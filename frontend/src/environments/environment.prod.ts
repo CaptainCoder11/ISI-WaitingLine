@@ -1,4 +1,4 @@
-export const environment = {
+export const prodenvironment = {
   production: true,
   api_url: "/api",
   firebaseConfig: {
