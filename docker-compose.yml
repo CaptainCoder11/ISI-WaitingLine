@@ -14,7 +14,7 @@ services:
     build: ./backend
     image: backend
     ports:
-      - 3333:3333
+      - 3001:3001
         # TODO:
         # environment:
         #   CONFIG_MYSQL_DATABASE: fifo

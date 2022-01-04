@@ -1,5 +1,6 @@
 package com.isimtl.waitingline.controller;
 
+import com.isimtl.waitingline.entity.Appointment;
 import com.isimtl.waitingline.entity.Store;
 import com.isimtl.waitingline.service.IStoreService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 
@@ -23,12 +25,59 @@ public class StoreController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<Store>> getAll()  {
+    public ResponseEntity<List<Store>> getAll() {
         return ResponseEntity.ok(this.storeService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Store> getById(@PathVariable("id") int id) {
         return ResponseEntity.ok(storeService.findById(id));
+    }
+
+    @GetMapping(value = "/{storeId}/arrival/{userId}")
+    public ResponseEntity<Boolean> userArrival(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId) {
+        try {
+            storeService.arrival(userId, storeId);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.ok(true);
+    }
+
+    @GetMapping(value = "/{storeId}/departure/{userId}")
+    public ResponseEntity<Boolean> userDeparture(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId) {
+        try {
+            storeService.departure(userId, storeId);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.ok(true);
+    }
+
+    @GetMapping(value = "/{storeId}/remove/{userId}")
+    public ResponseEntity<Boolean> userRemove(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId) {
+        try {
+            storeService.remove(userId, storeId);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.ok(true);
+    }
+
+    @GetMapping(value = "/in-store-user-list/{storeId}")
+    public ResponseEntity<List<Appointment>> usersList(@PathVariable("storeId") int storeId) {
+        try {
+            return ResponseEntity.ok(storeService.InStoreUsers(storeId));
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

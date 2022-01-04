@@ -1,6 +1,5 @@
 package com.isimtl.waitingline.controller;
 
-import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +18,7 @@ public class HomeController {
 
     @GetMapping("/")
     public Map<String, String> getVersion(){
-        HashMap<String, String> projectDetails = new HashMap<>();
+        HashMap<String, String> projectDetails = new HashMap<String,String>();
         projectDetails.put("name", name);
         projectDetails.put("version", version);
         return projectDetails;

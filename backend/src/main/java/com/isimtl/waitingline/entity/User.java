@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,8 +15,10 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Getter
+@Setter
 @Table(name = "user")
-@JsonIgnoreProperties(value = {"password_hash","password_salt","otp_expiry","date_added"})
+@JsonIgnoreProperties(value = {"otp_expiry", "date_added"})
 public class User {
 
     @Id
@@ -30,13 +35,9 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
-    @JsonIgnore
-    @Column(name = "password_hash")
-    private String passwordHash;
-
-    @JsonIgnore
-    @Column(name = "password_salt")
-    private String passwordSalt;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(name = "password")
+    private String password;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "otp")
@@ -51,8 +52,22 @@ public class User {
     private LocalDateTime dateAdded;
 
     @JsonIgnore
-    public String getVerificationData(){
-        return  getName()+ "/" + getEmail() +"/"+ getPhone() +"/"+getOtp();
+    public String getVerificationData() {
+        return getId()+ "/" +getName() + "/" + getEmail() + "/" + getPhone() + "/" + getOtp();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", otp='" + otp + '\'' +
+                ", otpExpiry=" + otpExpiry +
+                ", dateAdded=" + dateAdded +
+                '}';
     }
 
 }

@@ -1,6 +1,7 @@
 package com.isimtl.waitingline.controller;
 
 
+import com.isimtl.waitingline.entity.AppointmentStatus;
 import com.isimtl.waitingline.entity.Store;
 import com.isimtl.waitingline.entity.User;
 import com.isimtl.waitingline.service.ICustomerService;
@@ -59,7 +60,7 @@ public class CustomerController {
     @GetMapping("/remove-waiting-line/{userId}/{storeId}")
     public ResponseEntity<Boolean> removeWaitingList(@PathVariable("userId") int userId, @PathVariable("storeId") int storeId) {
         try {
-            customerService.removeWaitingLine(userId, storeId);
+            customerService.removeWaitingLine(userId, storeId, AppointmentStatus.In_Queue);
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
@@ -67,5 +68,4 @@ public class CustomerController {
         }
         return ResponseEntity.ok(true);
     }
-
 }

@@ -111,16 +111,21 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public void removeWaitingLine(int userId, int storeId) throws ExecutionException, InterruptedException {
+    public void removeWaitingLine(int userId, int storeId,AppointmentStatus status) throws ExecutionException, InterruptedException {
         try {
             FBUser fbUser = getFbUser(userId, storeId);
+            Appointment appointment = appointmentService.findByIds(userId,storeId,status);
+            System.out.println(appointment);
+            appointment.setStatus(AppointmentStatus.Cancelled);
+            appointmentService.save(appointment);
             fbUserService.delete(fbUser);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private FBUser getFbUser(int userId, int storeId) {
+    @Override
+    public FBUser getFbUser(int userId, int storeId) {
         Optional<Store> storeResult = storeRepository.findById(Integer.valueOf(storeId));
         Store store = null;
         if (storeResult.isPresent())
@@ -140,8 +145,13 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     private Appointment getAppointmentDetail(FBUser fbUser) {
+        User user = new User();
+        user.setId(fbUser.getId());
+        user.setName(fbUser.getName());
+        user.setEmail(fbUser.getEmail());
+
         Appointment appointment = new Appointment();
-        appointment.setUserId(fbUser.getId());
+        appointment.setUser(user);
         appointment.setStoreId(fbUser.getStoreId());
         appointment.setDateCreated(LocalDateTime.now());
         appointment.setStatus(AppointmentStatus.In_Queue);

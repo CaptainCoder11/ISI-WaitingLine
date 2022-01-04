@@ -8,6 +8,7 @@ target/
 .classpath
 .factorypath
 .project
+.mvn
 .settings
 .springBeans
 .sts4-cache

@@ -3,16 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Store } from '../models/store.model';
 import { environment } from 'src/environments/environment';
-import { prodenvironment } from 'src/environments/environment.prod'
 
 @Injectable()
 export class StoreService {
-  private _url: string = `${prodenvironment.api_url}/store`;
+  private _url: string = `${environment.api_url}/store`;
 
   constructor(private httpClient: HttpClient) {}
 
   getAll(): Observable<Store[]> {
-    console.log(this._url)
     return this.httpClient.get<Store[]>(this._url);
   }
 

@@ -13,6 +13,7 @@ import { StoreService } from '../common/services/store.service';
 import { StoreEmployeeFormComponent } from './components/employee-form/employee-form.component';
 import { StoreEmployeeListComponent } from './components/employee-list/employee-list.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { EmployeeFormComponent } from './pages/employee-form/employee-form.component';
 
 const DashboardComponents = [StoreDashboardComponent];
 
@@ -30,6 +31,7 @@ const EmployeeComponents = [
     StoreFooterComponent,
     DashboardComponents,
     EmployeeComponents,
+    EmployeeFormComponent,
   ],
   imports: [
     ReactiveFormsModule,

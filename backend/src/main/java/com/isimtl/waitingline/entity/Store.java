@@ -1,4 +1,5 @@
 package com.isimtl.waitingline.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -17,6 +18,9 @@ public class Store implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @Column(name = "owner_id")
+    private int ownerId;
 
     @Column(name = "name")
     private String name;
