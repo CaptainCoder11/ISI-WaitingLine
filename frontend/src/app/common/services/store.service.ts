@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class StoreService {
-  private _url: string = `/api/store`;
+  private _url: string = `/backend/api/store`;
 
   constructor(private httpClient: HttpClient) {}
 
